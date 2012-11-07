@@ -1,7 +1,12 @@
-#include <iostream>
+#include <QApplication>
 
-int main(int argc, char *argv[])
-{
-    cout << "lol" << endl;
-    return 0;
+#include "contactsgui.h"
+
+
+int main(int argc, char** argv) {
+    QApplication app(argc, argv);
+    ContactsGui gui;
+    gui.show();
+
+    return app.exec();
 }
