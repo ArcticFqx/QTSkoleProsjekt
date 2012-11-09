@@ -3,8 +3,6 @@
 
 #include <QWidget>
 
-#include "contactaddgui.h"
-
 
 namespace Ui {
 class ContactsGui;
@@ -21,9 +19,10 @@ public:
 private slots:
     void on_addButton_clicked();
 
+    void on_deleteButton_clicked();
+
 private:
     Ui::ContactsGui* ui;
-    ContactAddGui* addGui;
 
     void dummyData();
 };

@@ -2,15 +2,12 @@ SOURCES += \
     main.cpp \
     appointment.cpp \
     contact.cpp \
-    contactsgui.cpp \
-    contactaddgui.cpp
+    contactsgui.cpp
 
 HEADERS += \
     appointment.h \
     contact.h \
-    contactsgui.h \
-    contactaddgui.h
+    contactsgui.h
 
 FORMS += \
-    contactsgui.ui \
-    contactaddgui.ui
+    contactsgui.ui

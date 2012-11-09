@@ -13,7 +13,7 @@ class Appointment {
 public:
     Appointment();
     Appointment(QDateTime, QDateTime, QString, QString, QString,
-                QString, QVector<Contact>);
+                QString, Contact);
 
 
     QDateTime getStartTime() const { return startTime; }
@@ -24,7 +24,7 @@ public:
     QString getType() const { return type; }
     QString getInfo() const { return info; }
 
-    QVector<Contact> getContacts() const { return contacts; }
+    Contact getContact() const { return contact; }
 
 
     void setStartTime(QDateTime start) { startTime = start; }
@@ -35,7 +35,7 @@ public:
     void setType(QString typetxt) { type = typetxt; }
     void setInfo(QString infotxt) { info = infotxt; }
 
-    void setContacts(QVector<Contact> vector) { contacts = vector; }
+    void setContact(Contact contactObj) { contact = contactObj; }
 
 private:
     QDateTime startTime;
@@ -46,7 +46,7 @@ private:
     QString type;
     QString info;
 
-    QVector<Contact> contacts;
+    Contact contact;
 
 };
 

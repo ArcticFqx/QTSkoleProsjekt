@@ -1,20 +1,17 @@
 #include <QAction>
+#include <QInputDialog>
+#include <QLineEdit>
 
-#include "contactaddgui.h"
 #include "contactsgui.h"
 #include "ui_contactsgui.h"
 
-ContactsGui::ContactsGui(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::ContactsGui)
-{
+
+ContactsGui::ContactsGui(QWidget *parent) : QWidget(parent), ui(new Ui::ContactsGui) {
     ui->setupUi(this);
-    addGui = new ContactAddGui();
     dummyData();
 }
 
-ContactsGui::~ContactsGui()
-{
+ContactsGui::~ContactsGui() {
     delete ui;
 }
 
@@ -26,6 +23,14 @@ void ContactsGui::dummyData() {
 }
 
 void ContactsGui::on_addButton_clicked() {
-    addGui->show();
-    ui->contactsList->addItem("trykte på knapp");
+    bool ok;
+    QString contact = QInputDialog::getText(this, "Ny kontakt", "Navn:", QLineEdit::Normal, "", &ok);
+
+    if (ok && !contact.isEmpty()) {
+        ui->contactsList->addItem(contact);
+    }
+}
+
+void ContactsGui::on_deleteButton_clicked() {
+    delete ui->contactsList->currentItem();
 }

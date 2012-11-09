@@ -11,58 +11,69 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Kontaktliste</string>
   </property>
-  <widget class="QPushButton" name="addButton">
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>250</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Opprett ny</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="closeButton">
-   <property name="geometry">
-    <rect>
-     <x>280</x>
-     <y>250</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Lukk</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="deleteButton">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>250</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Slett</string>
-   </property>
-  </widget>
-  <widget class="QListWidget" name="contactsList">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
+     <x>20</x>
      <y>20</y>
-     <width>256</width>
-     <height>161</height>
+     <width>351</width>
+     <height>251</height>
     </rect>
    </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Kontakter</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="3">
+     <widget class="QListWidget" name="contactsList"/>
+    </item>
+    <item row="2" column="0">
+     <widget class="QPushButton" name="addButton">
+      <property name="text">
+       <string>Opprett ny</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QPushButton" name="deleteButton">
+      <property name="text">
+       <string>Slett</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QPushButton" name="closeButton">
+      <property name="text">
+       <string>Lukk</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>closeButton</sender>
+   <signal>clicked()</signal>
+   <receiver>ContactsGui</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>311</x>
+     <y>271</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>230</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

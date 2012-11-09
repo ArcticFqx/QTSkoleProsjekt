@@ -10,6 +10,8 @@ public:
     Contact();
     Contact(QString);
 
+    QString getContactName() { return contactName; }
+
 private:
     QString contactName;
 
