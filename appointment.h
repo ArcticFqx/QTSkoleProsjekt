@@ -5,15 +5,13 @@
 #include <QVector>
 #include <QString>
 
-#include "contact.h"
-
 
 class Appointment {
 
 public:
     Appointment();
     Appointment(QDateTime, QDateTime, QString, QString, QString,
-                QString, Contact);
+                QString, QString);
 
 
     QDateTime getStartTime() const { return startTime; }
@@ -24,7 +22,7 @@ public:
     QString getType() const { return type; }
     QString getInfo() const { return info; }
 
-    Contact getContact() const { return contact; }
+    QString getContact() const { return contact; }
 
 
     void setStartTime(QDateTime start) { startTime = start; }
@@ -35,7 +33,7 @@ public:
     void setType(QString typetxt) { type = typetxt; }
     void setInfo(QString infotxt) { info = infotxt; }
 
-    void setContact(Contact contactObj) { contact = contactObj; }
+    void setContact(QString contacttxt) { contact = contacttxt; }
 
 private:
     QDateTime startTime;
@@ -46,7 +44,7 @@ private:
     QString type;
     QString info;
 
-    Contact contact;
+    QString contact;
 
 };
 
