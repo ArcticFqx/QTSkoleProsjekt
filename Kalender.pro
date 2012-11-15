@@ -1,11 +1,14 @@
 SOURCES += \
     main.cpp \
     appointment.cpp \
-    contactsgui.cpp
+    contactsgui.cpp \
+    calendarmainwindow.cpp
 
 HEADERS += \
     appointment.h \
-    contactsgui.h
+    contactsgui.h \
+    calendarmainwindow.h
 
 FORMS += \
-    contactsgui.ui
+    contactsgui.ui \
+    calendarmainwindow.ui
