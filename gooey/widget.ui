@@ -142,34 +142,12 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_3">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-        </widget>
+        <widget class="QComboBox" name="comboBox"/>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>20</width>
-           <height>23</height>
-          </size>
-         </property>
-         <property name="mouseTracking">
-          <bool>false</bool>
-         </property>
+        <widget class="QToolButton" name="toolButton">
          <property name="text">
-          <string>..</string>
+          <string>...</string>
          </property>
         </widget>
        </item>

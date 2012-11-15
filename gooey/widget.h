@@ -14,6 +14,9 @@ class Widget : public QWidget
 public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
+
+public slots:
+    void getContact(QString);
     
 private:
     Ui::Widget *ui;

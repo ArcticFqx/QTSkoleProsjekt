@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'widget.ui'
 **
-** Created: Thu 8. Nov 18:49:00 2012
+** Created: Tue 13. Nov 09:43:06 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -14,15 +14,16 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QComboBox>
 #include <QtGui/QDateTimeEdit>
 #include <QtGui/QDialogButtonBox>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
-#include <QtGui/QPushButton>
 #include <QtGui/QRadioButton>
 #include <QtGui/QTextEdit>
+#include <QtGui/QToolButton>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
 
@@ -55,8 +56,8 @@ public:
     QLineEdit *lineEdit_2;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_3;
-    QLineEdit *lineEdit_3;
-    QPushButton *pushButton;
+    QComboBox *comboBox;
+    QToolButton *toolButton;
     QTextEdit *textEdit;
     QDialogButtonBox *buttonBox;
 
@@ -197,24 +198,15 @@ public:
 
         horizontalLayout_3->addWidget(label_3);
 
-        lineEdit_3 = new QLineEdit(Widget);
-        lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
-        lineEdit_3->setEnabled(false);
+        comboBox = new QComboBox(Widget);
+        comboBox->setObjectName(QString::fromUtf8("comboBox"));
 
-        horizontalLayout_3->addWidget(lineEdit_3);
+        horizontalLayout_3->addWidget(comboBox);
 
-        pushButton = new QPushButton(Widget);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setEnabled(true);
-        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(pushButton->sizePolicy().hasHeightForWidth());
-        pushButton->setSizePolicy(sizePolicy1);
-        pushButton->setMaximumSize(QSize(20, 23));
-        pushButton->setMouseTracking(false);
+        toolButton = new QToolButton(Widget);
+        toolButton->setObjectName(QString::fromUtf8("toolButton"));
 
-        horizontalLayout_3->addWidget(pushButton);
+        horizontalLayout_3->addWidget(toolButton);
 
 
         verticalLayout_2->addLayout(horizontalLayout_3);
@@ -254,7 +246,7 @@ public:
         radioAnnet->setText(QApplication::translate("Widget", "Annet", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("Widget", "Sted", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("Widget", "Kontakter", 0, QApplication::UnicodeUTF8));
-        pushButton->setText(QApplication::translate("Widget", "..", 0, QApplication::UnicodeUTF8));
+        toolButton->setText(QApplication::translate("Widget", "...", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
