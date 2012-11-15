@@ -22,9 +22,6 @@ ContactsGui::~ContactsGui() {
 }
 
 
-//Signals
-//void ContactsGui::
-
 //Private slots
 void ContactsGui::on_addButton_clicked() {
     bool ok;
