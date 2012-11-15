@@ -82,5 +82,5 @@ void CalendarMainWindow::on_contactlistButton_clicked() {
 }
 
 void CalendarMainWindow::on_removeAppointmentButton_clicked() {
-    //QList<Appointment> list = ui->appointmentTable->currentItem();
+    QList<Appointment> list = ui->appointmentTable->currentItem();
 }
