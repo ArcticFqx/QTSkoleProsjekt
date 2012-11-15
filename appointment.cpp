@@ -9,3 +9,8 @@ Appointment::Appointment(QDateTime start, QDateTime end, QString name, QString l
         startTime(start), endTime(end), appointmentName(name),
         location(loc), type(typetxt), info(infotxt), contact(contacttxt) {
 }
+
+
+bool Appointment::operator<(const Appointment& other) const {
+    return startTime<(other.getStartTime());
+}

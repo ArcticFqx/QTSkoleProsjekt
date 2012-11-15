@@ -2,7 +2,12 @@
 #define CALENDARMAINWINDOW_H
 
 #include <QDate>
+#include <QList>
 #include <QMainWindow>
+#include <QMap>
+
+#include "appointment.h"
+#include "contactsgui.h"
 
 
 namespace Ui {
@@ -25,10 +30,16 @@ private slots:
 public slots:
     void on_newAppointmentButton();
 
+    void on_contactlistButton_clicked();
+
+    void on_removeAppointmentButton_clicked();
+
 private:
     Ui::CalendarMainWindow *ui;
+    ContactsGui contactsgui;
+    QMap<QDate, QList<Appointment> >  map;
 
-    void insert() const;
+    void load();
 };
 
 #endif // CALENDARMAINWINDOW_H
