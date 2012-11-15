@@ -23,6 +23,12 @@
       <height>155</height>
      </rect>
     </property>
+    <property name="firstDayOfWeek">
+     <enum>Qt::Monday</enum>
+    </property>
+    <property name="gridVisible">
+     <bool>false</bool>
+    </property>
    </widget>
    <widget class="QPushButton" name="gotoTodayButton">
     <property name="geometry">
@@ -53,9 +59,9 @@
    <widget class="QLabel" name="chosenDateLabel">
     <property name="geometry">
      <rect>
-      <x>370</x>
+      <x>380</x>
       <y>40</y>
-      <width>71</width>
+      <width>121</width>
       <height>16</height>
      </rect>
     </property>
@@ -115,19 +121,6 @@
      <string>Slett alle avtaler</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="showAppointmentButton">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>310</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Vis avtale</string>
-    </property>
-   </widget>
    <widget class="QTableWidget" name="appointmentTable">
     <property name="geometry">
      <rect>
@@ -137,12 +130,21 @@
       <height>192</height>
      </rect>
     </property>
+    <property name="selectionMode">
+     <enum>QAbstractItemView::SingleSelection</enum>
+    </property>
+    <property name="sortingEnabled">
+     <bool>false</bool>
+    </property>
     <property name="rowCount">
      <number>0</number>
     </property>
     <property name="columnCount">
      <number>0</number>
     </property>
+    <attribute name="verticalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

@@ -35,6 +35,9 @@ public:
 
     void setContact(QString contacttxt) { contact = contacttxt; }
 
+
+    bool operator<(const Appointment&) const;
+
 private:
     QDateTime startTime;
     QDateTime endTime;
