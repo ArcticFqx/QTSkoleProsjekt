@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'appointmentui.ui'
 **
-** Created: Thu 15. Nov 15:11:41 2012
+** Created: Thu 15. Nov 16:44:14 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -65,16 +65,7 @@ public:
     {
         if (AppointmentUi->objectName().isEmpty())
             AppointmentUi->setObjectName(QString::fromUtf8("AppointmentUi"));
-        AppointmentUi->resize(276, 439);
-        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(AppointmentUi->sizePolicy().hasHeightForWidth());
-        AppointmentUi->setSizePolicy(sizePolicy);
-        QIcon icon;
-        icon.addFile(QString::fromUtf8("../../../Dropbox/Public/fv.png"), QSize(), QIcon::Normal, QIcon::Off);
-        AppointmentUi->setWindowIcon(icon);
-        AppointmentUi->setWindowOpacity(1);
+        AppointmentUi->resize(252, 315);
         verticalLayout_3 = new QVBoxLayout(AppointmentUi);
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
@@ -228,15 +219,13 @@ public:
 
 
         retranslateUi(AppointmentUi);
-        QObject::connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), AppointmentUi, SLOT(close()));
-        QObject::connect(radioAnnet, SIGNAL(toggled(bool)), lineEditAnnet, SLOT(setEnabled(bool)));
 
         QMetaObject::connectSlotsByName(AppointmentUi);
     } // setupUi
 
     void retranslateUi(QWidget *AppointmentUi)
     {
-        AppointmentUi->setWindowTitle(QApplication::translate("AppointmentUi", "Nytt arrangement", 0, QApplication::UnicodeUTF8));
+        AppointmentUi->setWindowTitle(QApplication::translate("AppointmentUi", "Form", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("AppointmentUi", "Navn", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("AppointmentUi", "Start", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("AppointmentUi", "Slutt", 0, QApplication::UnicodeUTF8));

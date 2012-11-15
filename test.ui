@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AppointmentUi</class>
- <widget class="QWidget" name="AppointmentUi">
+ <class>test</class>
+ <widget class="QWidget" name="test">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -160,7 +160,6 @@
    </item>
   </layout>
  </widget>
- <layoutdefault spacing="6" margin="11"/>
  <resources/>
  <connections/>
 </ui>

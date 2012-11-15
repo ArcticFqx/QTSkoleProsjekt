@@ -14,9 +14,6 @@ class AppointmentUi : public QWidget
 public:
     explicit AppointmentUi(QWidget *parent = 0);
     ~AppointmentUi();
-
-public slots:
-    void getContact(QString);
     
 private:
     Ui::AppointmentUi *ui;

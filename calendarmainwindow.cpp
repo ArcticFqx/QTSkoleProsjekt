@@ -4,6 +4,7 @@
 #include "appointment.h"
 #include "calendarmainwindow.h"
 #include "ui_calendarmainwindow.h"
+#include "appointmentui.h"
 
 
 CalendarMainWindow::CalendarMainWindow(QWidget *parent) :
@@ -23,6 +24,8 @@ CalendarMainWindow::CalendarMainWindow(QWidget *parent) :
     table->horizontalHeader()->setResizeMode(headerLabels.count()-1, QHeaderView::Stretch);
 
     insert();
+
+    connect(ui->addAppointmentButton,SIGNAL(clicked()),this,SLOT(on_newAppointmentButton()));
 }
 
 CalendarMainWindow::~CalendarMainWindow() {
@@ -51,4 +54,10 @@ void CalendarMainWindow::on_gotoTodayButton_clicked() {
 
 void CalendarMainWindow::on_calendarWidget_clicked(const QDate &date) {
     ui->chosenDateLabel->setText(date.toString());
+}
+
+void CalendarMainWindow::on_newAppointmentButton()
+{
+    AppointmentUi appui = AppointmentUi();
+    appui.show();
 }

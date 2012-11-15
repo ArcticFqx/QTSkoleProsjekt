@@ -22,6 +22,9 @@ private slots:
 
     void on_calendarWidget_clicked(const QDate &date);
 
+public slots:
+    void on_newAppointmentButton();
+
 private:
     Ui::CalendarMainWindow *ui;
 
