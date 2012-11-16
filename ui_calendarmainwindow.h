@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'calendarmainwindow.ui'
 **
-** Created: Thu 15. Nov 17:03:57 2012
+** Created: Fri 16. Nov 13:44:01 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -17,11 +17,13 @@
 #include <QtGui/QCalendarWidget>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
+#include <QtGui/QLineEdit>
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenuBar>
 #include <QtGui/QPushButton>
 #include <QtGui/QStatusBar>
 #include <QtGui/QTableWidget>
+#include <QtGui/QTextEdit>
 #include <QtGui/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -39,6 +41,15 @@ public:
     QPushButton *editAppointmentButton;
     QPushButton *removeAllAppointmentsButton;
     QTableWidget *appointmentTable;
+    QLabel *typeLabel;
+    QLabel *locationLabel;
+    QLabel *contactLabel;
+    QLabel *infoLabel;
+    QLineEdit *typeLineEdit;
+    QLineEdit *locationLineEdit;
+    QLineEdit *contactLineEdit;
+    QTextEdit *infoLineEdit;
+    QPushButton *closeButton;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -68,21 +79,52 @@ public:
         addAppointmentButton->setGeometry(QRect(180, 260, 91, 23));
         removeAppointmentButton = new QPushButton(centralwidget);
         removeAppointmentButton->setObjectName(QString::fromUtf8("removeAppointmentButton"));
-        removeAppointmentButton->setGeometry(QRect(390, 350, 75, 23));
+        removeAppointmentButton->setGeometry(QRect(510, 460, 75, 23));
         editAppointmentButton = new QPushButton(centralwidget);
         editAppointmentButton->setObjectName(QString::fromUtf8("editAppointmentButton"));
-        editAppointmentButton->setGeometry(QRect(520, 310, 75, 23));
+        editAppointmentButton->setGeometry(QRect(420, 460, 75, 23));
         removeAllAppointmentsButton = new QPushButton(centralwidget);
         removeAllAppointmentsButton->setObjectName(QString::fromUtf8("removeAllAppointmentsButton"));
-        removeAllAppointmentsButton->setGeometry(QRect(520, 350, 91, 23));
+        removeAllAppointmentsButton->setGeometry(QRect(600, 460, 91, 23));
         appointmentTable = new QTableWidget(centralwidget);
         appointmentTable->setObjectName(QString::fromUtf8("appointmentTable"));
-        appointmentTable->setGeometry(QRect(380, 90, 361, 192));
+        appointmentTable->setGeometry(QRect(380, 90, 361, 151));
         appointmentTable->setSelectionMode(QAbstractItemView::SingleSelection);
         appointmentTable->setSortingEnabled(false);
         appointmentTable->setRowCount(0);
         appointmentTable->setColumnCount(0);
         appointmentTable->verticalHeader()->setVisible(false);
+        typeLabel = new QLabel(centralwidget);
+        typeLabel->setObjectName(QString::fromUtf8("typeLabel"));
+        typeLabel->setGeometry(QRect(450, 280, 46, 13));
+        locationLabel = new QLabel(centralwidget);
+        locationLabel->setObjectName(QString::fromUtf8("locationLabel"));
+        locationLabel->setGeometry(QRect(450, 320, 46, 13));
+        contactLabel = new QLabel(centralwidget);
+        contactLabel->setObjectName(QString::fromUtf8("contactLabel"));
+        contactLabel->setGeometry(QRect(450, 350, 46, 13));
+        infoLabel = new QLabel(centralwidget);
+        infoLabel->setObjectName(QString::fromUtf8("infoLabel"));
+        infoLabel->setGeometry(QRect(450, 380, 46, 13));
+        typeLineEdit = new QLineEdit(centralwidget);
+        typeLineEdit->setObjectName(QString::fromUtf8("typeLineEdit"));
+        typeLineEdit->setGeometry(QRect(520, 280, 113, 20));
+        typeLineEdit->setReadOnly(true);
+        locationLineEdit = new QLineEdit(centralwidget);
+        locationLineEdit->setObjectName(QString::fromUtf8("locationLineEdit"));
+        locationLineEdit->setGeometry(QRect(520, 310, 113, 20));
+        locationLineEdit->setReadOnly(true);
+        contactLineEdit = new QLineEdit(centralwidget);
+        contactLineEdit->setObjectName(QString::fromUtf8("contactLineEdit"));
+        contactLineEdit->setGeometry(QRect(520, 350, 113, 20));
+        contactLineEdit->setReadOnly(true);
+        infoLineEdit = new QTextEdit(centralwidget);
+        infoLineEdit->setObjectName(QString::fromUtf8("infoLineEdit"));
+        infoLineEdit->setGeometry(QRect(520, 380, 111, 64));
+        infoLineEdit->setReadOnly(true);
+        closeButton = new QPushButton(centralwidget);
+        closeButton->setObjectName(QString::fromUtf8("closeButton"));
+        closeButton->setGeometry(QRect(180, 300, 75, 23));
         CalendarMainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(CalendarMainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -107,6 +149,11 @@ public:
         removeAppointmentButton->setText(QApplication::translate("CalendarMainWindow", "Slett avtale", 0, QApplication::UnicodeUTF8));
         editAppointmentButton->setText(QApplication::translate("CalendarMainWindow", "Endre avtale", 0, QApplication::UnicodeUTF8));
         removeAllAppointmentsButton->setText(QApplication::translate("CalendarMainWindow", "Slett alle avtaler", 0, QApplication::UnicodeUTF8));
+        typeLabel->setText(QApplication::translate("CalendarMainWindow", "Type", 0, QApplication::UnicodeUTF8));
+        locationLabel->setText(QApplication::translate("CalendarMainWindow", "Sted", 0, QApplication::UnicodeUTF8));
+        contactLabel->setText(QApplication::translate("CalendarMainWindow", "Kontakt", 0, QApplication::UnicodeUTF8));
+        infoLabel->setText(QApplication::translate("CalendarMainWindow", "Info", 0, QApplication::UnicodeUTF8));
+        closeButton->setText(QApplication::translate("CalendarMainWindow", "Lagre og lukk", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

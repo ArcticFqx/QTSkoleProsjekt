@@ -30,13 +30,8 @@ private slots:
     void on_gotoTodayButton_clicked();
     void on_removeAllAppointmentsButton_clicked();
     void on_removeAppointmentButton_clicked();
-
-public slots:
     void on_newAppointmentButton();
 
-    void on_contactlistButton_clicked();
-
-    void on_removeAppointmentButton_clicked();
 
 private:
     Ui::CalendarMainWindow *ui;
