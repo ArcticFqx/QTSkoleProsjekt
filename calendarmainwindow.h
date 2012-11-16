@@ -23,20 +23,25 @@ public:
     ~CalendarMainWindow();
     
 private slots:
-    void on_gotoTodayButton_clicked();
-
+    void on_appointmentTable_cellClicked(int row, int column);
     void on_calendarWidget_clicked(const QDate &date);
-
+    void on_closeButton_clicked();
     void on_contactlistButton_clicked();
-
+    void on_gotoTodayButton_clicked();
+    void on_removeAllAppointmentsButton_clicked();
     void on_removeAppointmentButton_clicked();
 
 private:
     Ui::CalendarMainWindow *ui;
     ContactsGui contactsgui;
     QMap<QDate, QList<Appointment> >  map;
+    QFile* file;
 
-    void load();
+    QString getPathToFilename() const;
+    void load();    //temporary
+    void saveToFile() const;
+    void setAppointmentTableHeaders() const;
+    void updateAppointmentTable(const QDate&) const;
 };
 
 #endif // CALENDARMAINWINDOW_H

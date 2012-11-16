@@ -1,4 +1,9 @@
+#include <QTextStream>
+
 #include "appointment.h"
+
+
+const QString Appointment::SEPARATOR = "|";
 
 
 Appointment::Appointment() {
@@ -13,4 +18,22 @@ Appointment::Appointment(QDateTime start, QDateTime end, QString name, QString l
 
 bool Appointment::operator<(const Appointment& other) const {
     return startTime<(other.getStartTime());
+}
+
+QString Appointment::toString() const {
+    QString string = startTime.toString();
+    string.append(SEPARATOR);
+    string.append(endTime.toString());
+    string.append(SEPARATOR);
+    string.append(appointmentName);
+    string.append(SEPARATOR);
+    string.append(location);
+    string.append(SEPARATOR);
+    string.append(type);
+    string.append(SEPARATOR);
+    string.append(info);
+    string.append(SEPARATOR);
+    string.append(contact);
+
+    return string;
 }
