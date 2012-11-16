@@ -3,6 +3,9 @@
 
 #include <QWidget>
 
+#include "appointment.h"
+
+
 namespace Ui {
 class AppointmentUi;
 }
@@ -15,14 +18,21 @@ public:
     explicit AppointmentUi(QWidget *parent = 0);
     ~AppointmentUi();
 
+public slots:
+    void setContactLineEditText(QString);
+
+private slots:
+    void on_buttonBox_accepted();
+
 private:
     Ui::AppointmentUi *ui;
 
+    void setDateTimeEditDefaults() const;
+
 signals:
+    void newAppointment(Appointment, int);
     void openContactsList();
 
-private slots:
-    void triggerOpenContactsList();
 };
 
 #endif // APPOINTMENTUI_H

@@ -37,6 +37,11 @@ bool Appointment::operator<(const Appointment& other) const {
     return startTime < other.getStartTime();
 }
 
+void Appointment::moveDays(int days) {
+    startTime = startTime.addDays(days);
+    endTime = endTime.addDays(days);
+}
+
 QString Appointment::toString() const {
     QString string = startTime.toString();
     string.append(SEPARATOR);
