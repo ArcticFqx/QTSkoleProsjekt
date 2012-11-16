@@ -15,23 +15,26 @@ CalendarMainWindow::CalendarMainWindow(QWidget *parent) :
 
     ui->setupUi(this);
     contactsgui = new ContactsGui();
+    appointmentUi = new AppointmentUi();
 
     file = new QFile(getPathToFilename());
 
     setAppointmentTableHeaders();
-    updateAppointmentTable(ui->calendarWidget->selectedDate());
-
 
     loadFromFile();
 
+    updateAppointmentTable(ui->calendarWidget->selectedDate());
+
     connect(ui->addAppointmentButton,SIGNAL(clicked()),this,SLOT(on_newAppointmentButton()));
     connect(appointmentUi,SIGNAL(openContactsList()),this,SLOT(on_contactlistButton_clicked()));
-
+    connect(contactsgui, SIGNAL(selectedContact(QString)), appointmentUi, SLOT(setContactLineEditText(QString)));
+    connect(appointmentUi, SIGNAL(newAppointment(Appointment, int)), this, SLOT(addAppointment(Appointment, int)));
 }
 
 CalendarMainWindow::~CalendarMainWindow() {
-    delete ui;
     delete contactsgui;
+    delete appointmentUi;
+    delete ui;
 }
 
 
@@ -42,6 +45,30 @@ void CalendarMainWindow::closeEvent(QCloseEvent* event) {
 }
 
 //Private slots
+void CalendarMainWindow::addAppointment(Appointment appointment) {
+    QDate startDate = appointment.getStartTime().date();
+
+    if (map.contains(startDate)) {
+        QList<Appointment> list = map.take(startDate);
+        list << appointment;
+        qSort(list);
+        map.insert(startDate, list);
+    } else {
+        QList<Appointment> list;
+        list << appointment;
+        map.insert(startDate, list);
+    }
+}
+
+void CalendarMainWindow::addAppointment(Appointment appointment, int repeat) {
+    addAppointment(appointment);
+
+    for (int i=0; i<repeat; i++) {
+        appointment.moveDays(7);
+        addAppointment(appointment);
+    }
+}
+
 void CalendarMainWindow::on_appointmentTable_cellClicked(int row, int column) {
     QDate selectedDate = ui->calendarWidget->selectedDate();
 
@@ -74,9 +101,8 @@ void CalendarMainWindow::on_gotoTodayButton_clicked() {
     updateAppointmentTable(QDate::currentDate());
 }
 
-void CalendarMainWindow::on_newAppointmentButton()
-{
-    appointmentUi.show();
+void CalendarMainWindow::on_newAppointmentButton() {
+    appointmentUi->show();
 }
 
 void CalendarMainWindow::on_removeAllAppointmentsButton_clicked() {
@@ -100,21 +126,6 @@ void CalendarMainWindow::on_removeAppointmentButton_clicked() {
 
 
 //Private methods
-void CalendarMainWindow::addAppointment(Appointment appointment) {
-    QDate startDate = appointment.getStartTime().date();
-
-    if (map.contains(startDate)) {
-        QList<Appointment> list = map.take(startDate);
-        list << appointment;
-        qSort(list);
-        map.insert(startDate, list);
-    } else {
-        QList<Appointment> list;
-        list << appointment;
-        map.insert(startDate, list);
-    }
-}
-
 QString CalendarMainWindow::getPathToFilename() const {
     QString path = QApplication::applicationDirPath();
     path.append("/");
