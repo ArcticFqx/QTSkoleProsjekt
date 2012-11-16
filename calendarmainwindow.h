@@ -8,6 +8,7 @@
 
 #include "appointment.h"
 #include "contactsgui.h"
+#include "appointmentui.h"
 
 
 namespace Ui {
@@ -37,6 +38,7 @@ public slots:
 private:
     Ui::CalendarMainWindow *ui;
     ContactsGui contactsgui;
+    AppointmentUi appointmentUi;
     QMap<QDate, QList<Appointment> >  map;
 
     void load();

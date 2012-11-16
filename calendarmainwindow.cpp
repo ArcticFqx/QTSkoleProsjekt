@@ -4,7 +4,6 @@
 #include "appointment.h"
 #include "calendarmainwindow.h"
 #include "ui_calendarmainwindow.h"
-#include "appointmentui.h"
 
 
 CalendarMainWindow::CalendarMainWindow(QWidget *parent) :
@@ -85,11 +84,10 @@ void CalendarMainWindow::on_contactlistButton_clicked() {
 }
 
 void CalendarMainWindow::on_removeAppointmentButton_clicked() {
-    QList<Appointment> list = ui->appointmentTable->currentItem();
+    //QList<Appointment> list = ui->appointmentTable->currentItem();
 }
 
 void CalendarMainWindow::on_newAppointmentButton()
 {
-    AppointmentUi appui = AppointmentUi();
-    appui.show();
+    appointmentUi.show();
 }

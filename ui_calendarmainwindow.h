@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'calendarmainwindow.ui'
 **
-** Created: Thu 15. Nov 16:41:48 2012
+** Created: Thu 15. Nov 17:03:57 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -38,7 +38,6 @@ public:
     QPushButton *removeAppointmentButton;
     QPushButton *editAppointmentButton;
     QPushButton *removeAllAppointmentsButton;
-    QPushButton *showAppointmentButton;
     QTableWidget *appointmentTable;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -53,6 +52,8 @@ public:
         calendarWidget = new QCalendarWidget(centralwidget);
         calendarWidget->setObjectName(QString::fromUtf8("calendarWidget"));
         calendarWidget->setGeometry(QRect(30, 60, 248, 155));
+        calendarWidget->setFirstDayOfWeek(Qt::Monday);
+        calendarWidget->setGridVisible(false);
         gotoTodayButton = new QPushButton(centralwidget);
         gotoTodayButton->setObjectName(QString::fromUtf8("gotoTodayButton"));
         gotoTodayButton->setGeometry(QRect(60, 260, 75, 23));
@@ -61,7 +62,7 @@ public:
         contactlistButton->setGeometry(QRect(60, 300, 75, 23));
         chosenDateLabel = new QLabel(centralwidget);
         chosenDateLabel->setObjectName(QString::fromUtf8("chosenDateLabel"));
-        chosenDateLabel->setGeometry(QRect(370, 40, 71, 16));
+        chosenDateLabel->setGeometry(QRect(380, 40, 121, 16));
         addAppointmentButton = new QPushButton(centralwidget);
         addAppointmentButton->setObjectName(QString::fromUtf8("addAppointmentButton"));
         addAppointmentButton->setGeometry(QRect(180, 260, 91, 23));
@@ -74,14 +75,14 @@ public:
         removeAllAppointmentsButton = new QPushButton(centralwidget);
         removeAllAppointmentsButton->setObjectName(QString::fromUtf8("removeAllAppointmentsButton"));
         removeAllAppointmentsButton->setGeometry(QRect(520, 350, 91, 23));
-        showAppointmentButton = new QPushButton(centralwidget);
-        showAppointmentButton->setObjectName(QString::fromUtf8("showAppointmentButton"));
-        showAppointmentButton->setGeometry(QRect(390, 310, 75, 23));
         appointmentTable = new QTableWidget(centralwidget);
         appointmentTable->setObjectName(QString::fromUtf8("appointmentTable"));
         appointmentTable->setGeometry(QRect(380, 90, 361, 192));
+        appointmentTable->setSelectionMode(QAbstractItemView::SingleSelection);
+        appointmentTable->setSortingEnabled(false);
         appointmentTable->setRowCount(0);
         appointmentTable->setColumnCount(0);
+        appointmentTable->verticalHeader()->setVisible(false);
         CalendarMainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(CalendarMainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -106,7 +107,6 @@ public:
         removeAppointmentButton->setText(QApplication::translate("CalendarMainWindow", "Slett avtale", 0, QApplication::UnicodeUTF8));
         editAppointmentButton->setText(QApplication::translate("CalendarMainWindow", "Endre avtale", 0, QApplication::UnicodeUTF8));
         removeAllAppointmentsButton->setText(QApplication::translate("CalendarMainWindow", "Slett alle avtaler", 0, QApplication::UnicodeUTF8));
-        showAppointmentButton->setText(QApplication::translate("CalendarMainWindow", "Vis avtale", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
