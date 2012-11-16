@@ -68,7 +68,7 @@ void CalendarMainWindow::on_contactlistButton_clicked() {
 
 void CalendarMainWindow::on_gotoTodayButton_clicked() {
     ui->calendarWidget->setSelectedDate(QDate::currentDate());
-    ui->chosenDateLabel->setText(QDate::currentDate().toString());
+    updateAppointmentTable(QDate::currentDate());
 }
 
 void CalendarMainWindow::on_newAppointmentButton()
