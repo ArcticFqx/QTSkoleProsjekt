@@ -23,7 +23,6 @@ CalendarMainWindow::CalendarMainWindow(QWidget *parent) :
     loadFromFile();
     updateAppointmentTable(ui->calendarWidget->selectedDate());
 
-    connect(ui->addAppointmentButton,SIGNAL(clicked()),this,SLOT(on_newAppointmentButton()));
     connect(appointmentUi,SIGNAL(openContactsList()),this,SLOT(on_contactlistButton_clicked()));
     connect(contactsgui, SIGNAL(selectedContact(QString)), appointmentUi, SLOT(setContactLineEditText(QString)));
     connect(appointmentUi, SIGNAL(newAppointment(Appointment, int)), this, SLOT(addAppointment(Appointment, int)));
@@ -68,6 +67,10 @@ void CalendarMainWindow::addAppointment(Appointment appointment, int repeat) {
     }
 }
 
+void CalendarMainWindow::on_addAppointmentButton_clicked() {
+    appointmentUi->show();
+}
+
 void CalendarMainWindow::on_appointmentTable_cellClicked(int row, int column) {
     QDate selectedDate = ui->calendarWidget->selectedDate();
 
@@ -98,10 +101,6 @@ void CalendarMainWindow::on_contactlistButton_clicked() {
 void CalendarMainWindow::on_gotoTodayButton_clicked() {
     ui->calendarWidget->setSelectedDate(QDate::currentDate());
     updateAppointmentTable(QDate::currentDate());
-}
-
-void CalendarMainWindow::on_newAppointmentButton() {
-    appointmentUi->show();
 }
 
 void CalendarMainWindow::on_removeAllAppointmentsButton_clicked() {
