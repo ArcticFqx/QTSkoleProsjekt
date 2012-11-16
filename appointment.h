@@ -9,9 +9,14 @@
 class Appointment {
 
 public:
+    enum Attributes {
+        START, END, NAME, LOCATION, TYPE, INFO, CONTACT
+    };
+
     Appointment();
-    Appointment(QDateTime, QDateTime, QString, QString, QString,
-                QString, QString);
+    Appointment(QStringList);
+    Appointment(QDateTime start, QDateTime end, QString name, QString loc,
+                QString typetxt, QString infotxt, QString contacttxt);
 
 
     QDateTime getStartTime() const { return startTime; }
@@ -39,6 +44,9 @@ public:
 
     QString toString() const;
 
+
+    static const QString SEPARATOR;
+
 private:
     QDateTime startTime;
     QDateTime endTime;
@@ -49,8 +57,6 @@ private:
     QString info;
 
     QString contact;
-
-    static const QString SEPARATOR;
 };
 
 #endif // APPOINTMENT_H

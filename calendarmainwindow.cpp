@@ -1,4 +1,5 @@
 #include <iostream>
+#include <QCloseEvent>
 #include <QDateTime>
 #include <QDebug>
 #include <QTextStream>
@@ -13,18 +14,28 @@ CalendarMainWindow::CalendarMainWindow(QWidget *parent) :
         ui(new Ui::CalendarMainWindow) {
 
     ui->setupUi(this);
-    setAppointmentTableHeaders();
+    contactsgui = new ContactsGui();
+
     file = new QFile(getPathToFilename());
 
-    load();
+    setAppointmentTableHeaders();
     updateAppointmentTable(ui->calendarWidget->selectedDate());
 
     connect(ui->addAppointmentButton,SIGNAL(clicked()),this,SLOT(on_newAppointmentButton()));
     connect(&appointmentUi,SIGNAL(openContactsList()),this,SLOT(on_contactlistButton_clicked()));
+    loadFromFile();
 }
 
 CalendarMainWindow::~CalendarMainWindow() {
     delete ui;
+    delete contactsgui;
+}
+
+
+//Public methods
+void CalendarMainWindow::closeEvent(QCloseEvent* event) {
+    saveToFile();
+    event->accept();
 }
 
 //Private slots
@@ -52,7 +63,7 @@ void CalendarMainWindow::on_closeButton_clicked() {
 }
 
 void CalendarMainWindow::on_contactlistButton_clicked() {
-    contactsgui.show();
+    contactsgui->show();
 }
 
 void CalendarMainWindow::on_gotoTodayButton_clicked() {
@@ -86,6 +97,21 @@ void CalendarMainWindow::on_removeAppointmentButton_clicked() {
 
 
 //Private methods
+void CalendarMainWindow::addAppointment(Appointment appointment) {
+    QDate startDate = appointment.getStartTime().date();
+
+    if (map.contains(startDate)) {
+        QList<Appointment> list = map.take(startDate);
+        list << appointment;
+        qSort(list);
+        map.insert(startDate, list);
+    } else {
+        QList<Appointment> list;
+        list << appointment;
+        map.insert(startDate, list);
+    }
+}
+
 QString CalendarMainWindow::getPathToFilename() const {
     QString path = QApplication::applicationDirPath();
     path.append("/");
@@ -94,21 +120,22 @@ QString CalendarMainWindow::getPathToFilename() const {
     return path;
 }
 
-void CalendarMainWindow::load() {
-    QDateTime start(QDate(2012,11,15), QTime(13,00));
-    QDateTime end(QDate(2012,11,15), QTime(14,00));
-    Appointment appointment(start, end, "Avtalenavn", "Bergen", "Undervisning", "Forelesning med Seip", "Petter Seip");
+void CalendarMainWindow::loadFromFile() {
+    if (!file->open(QIODevice::ReadOnly)) {
+        qDebug() << "Could not open file." << endl;
+    } else {
+        QTextStream in(file);
 
-    QDateTime start2(QDate(2012,11,15), QTime(12,00));
-    Appointment appointment2(start2, start, "Tidligere avtale", "Oslo", "Møte", "Snakka litt", "Random Fyr");
+        while (!in.atEnd()) {
+            QString line = in.readLine();
+            QStringList fields = line.split(Appointment::SEPARATOR);
 
-    QDate date = start.date();
+            Appointment appointment(fields);
+            addAppointment(appointment);
+        }
+    }
 
-    QList<Appointment> list1;
-    list1 << appointment << appointment2;
-    qSort(list1);
-
-    map.insert(date, list1);
+    file->close();
 }
 
 void CalendarMainWindow::saveToFile() const {

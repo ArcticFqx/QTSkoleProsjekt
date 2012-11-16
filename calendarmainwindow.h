@@ -21,6 +21,8 @@ class CalendarMainWindow : public QMainWindow {
 public:
     explicit CalendarMainWindow(QWidget *parent = 0);
     ~CalendarMainWindow();
+
+    virtual void closeEvent(QCloseEvent *);
     
 private slots:
     void on_appointmentTable_cellClicked(int row, int column);
@@ -34,12 +36,13 @@ private slots:
 
 private:
     Ui::CalendarMainWindow *ui;
-
+    ContactsGui* contactsgui;
     QMap<QDate, QList<Appointment> >  map;
     QFile* file;
 
+    void addAppointment(Appointment);
     QString getPathToFilename() const;
-    void load();    //temporary
+    void loadFromFile();
     void saveToFile() const;
     void setAppointmentTableHeaders() const;
     void updateAppointmentTable(const QDate&) const;
