@@ -17,7 +17,7 @@ class CalendarMainWindow;
 
 class CalendarMainWindow : public QMainWindow {
     Q_OBJECT
-    
+
 public:
     explicit CalendarMainWindow(QWidget *parent = 0);
     ~CalendarMainWindow();
@@ -32,11 +32,8 @@ private slots:
     void on_removeAppointmentButton_clicked();
     void on_newAppointmentButton();
 
-
 private:
     Ui::CalendarMainWindow *ui;
-    ContactsGui contactsgui;
-    AppointmentUi appointmentUi;
 
     QMap<QDate, QList<Appointment> >  map;
     QFile* file;
@@ -46,6 +43,10 @@ private:
     void saveToFile() const;
     void setAppointmentTableHeaders() const;
     void updateAppointmentTable(const QDate&) const;
+
+    ContactsGui contactsgui;
+    AppointmentUi appointmentUi;
+
 };
 
 #endif // CALENDARMAINWINDOW_H

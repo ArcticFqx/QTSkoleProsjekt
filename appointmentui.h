@@ -14,9 +14,15 @@ class AppointmentUi : public QWidget
 public:
     explicit AppointmentUi(QWidget *parent = 0);
     ~AppointmentUi();
-    
+
 private:
     Ui::AppointmentUi *ui;
+
+signals:
+    void openContactsList();
+
+private slots:
+    void triggerOpenContactsList();
 };
 
 #endif // APPOINTMENTUI_H

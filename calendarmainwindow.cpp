@@ -16,11 +16,11 @@ CalendarMainWindow::CalendarMainWindow(QWidget *parent) :
     setAppointmentTableHeaders();
     file = new QFile(getPathToFilename());
 
-    connect(ui->addAppointmentButton,SIGNAL(clicked()),this,SLOT(on_newAppointmentButton()));
-
     load();
     updateAppointmentTable(ui->calendarWidget->selectedDate());
 
+    connect(ui->addAppointmentButton,SIGNAL(clicked()),this,SLOT(on_newAppointmentButton()));
+    connect(&appointmentUi,SIGNAL(openContactsList()),this,SLOT(on_contactlistButton_clicked()));
 }
 
 CalendarMainWindow::~CalendarMainWindow() {

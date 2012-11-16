@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'appointmentui.ui'
 **
-** Created: Fri 16. Nov 11:01:28 2012
+** Created: Fri 16. Nov 15:18:16 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -14,7 +14,6 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
-#include <QtGui/QComboBox>
 #include <QtGui/QDateTimeEdit>
 #include <QtGui/QDialogButtonBox>
 #include <QtGui/QHBoxLayout>
@@ -56,8 +55,8 @@ public:
     QLineEdit *lineEdit_2;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_3;
-    QComboBox *comboBox;
-    QToolButton *toolButton;
+    QLineEdit *lineEdit;
+    QToolButton *buttonContactsList;
     QTextEdit *textEdit;
     QDialogButtonBox *buttonBox;
 
@@ -190,15 +189,17 @@ public:
 
         horizontalLayout_3->addWidget(label_3);
 
-        comboBox = new QComboBox(AppointmentUi);
-        comboBox->setObjectName(QString::fromUtf8("comboBox"));
+        lineEdit = new QLineEdit(AppointmentUi);
+        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+        lineEdit->setEnabled(false);
+        lineEdit->setReadOnly(true);
 
-        horizontalLayout_3->addWidget(comboBox);
+        horizontalLayout_3->addWidget(lineEdit);
 
-        toolButton = new QToolButton(AppointmentUi);
-        toolButton->setObjectName(QString::fromUtf8("toolButton"));
+        buttonContactsList = new QToolButton(AppointmentUi);
+        buttonContactsList->setObjectName(QString::fromUtf8("buttonContactsList"));
 
-        horizontalLayout_3->addWidget(toolButton);
+        horizontalLayout_3->addWidget(buttonContactsList);
 
 
         verticalLayout_2->addLayout(horizontalLayout_3);
@@ -220,6 +221,8 @@ public:
 
 
         retranslateUi(AppointmentUi);
+        QObject::connect(buttonBox, SIGNAL(accepted()), AppointmentUi, SLOT(close()));
+        QObject::connect(buttonBox, SIGNAL(rejected()), AppointmentUi, SLOT(close()));
 
         QMetaObject::connectSlotsByName(AppointmentUi);
     } // setupUi
@@ -236,7 +239,7 @@ public:
         radioAnnet->setText(QApplication::translate("AppointmentUi", "Annet", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("AppointmentUi", "Sted", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("AppointmentUi", "Kontakter", 0, QApplication::UnicodeUTF8));
-        toolButton->setText(QApplication::translate("AppointmentUi", "...", 0, QApplication::UnicodeUTF8));
+        buttonContactsList->setText(QApplication::translate("AppointmentUi", "...", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

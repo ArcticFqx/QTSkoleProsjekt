@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'contactsgui.ui'
 **
-** Created: Thu 15. Nov 16:41:48 2012
+** Created: Fri 16. Nov 15:19:17 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -38,6 +38,7 @@ public:
     {
         if (ContactsGui->objectName().isEmpty())
             ContactsGui->setObjectName(QString::fromUtf8("ContactsGui"));
+        ContactsGui->setWindowModality(Qt::ApplicationModal);
         ContactsGui->resize(400, 300);
         layoutWidget = new QWidget(ContactsGui);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
