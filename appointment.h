@@ -35,8 +35,9 @@ public:
 
     void setContact(QString contacttxt) { contact = contacttxt; }
 
-
     bool operator<(const Appointment&) const;
+
+    QString toString() const;
 
 private:
     QDateTime startTime;
@@ -49,6 +50,7 @@ private:
 
     QString contact;
 
+    static const QString SEPARATOR;
 };
 
 #endif // APPOINTMENT_H
