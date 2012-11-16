@@ -21,7 +21,12 @@ CalendarMainWindow::CalendarMainWindow(QWidget *parent) :
     setAppointmentTableHeaders();
     updateAppointmentTable(ui->calendarWidget->selectedDate());
 
+
     loadFromFile();
+
+    connect(ui->addAppointmentButton,SIGNAL(clicked()),this,SLOT(on_newAppointmentButton()));
+    connect(appointmentUi,SIGNAL(openContactsList()),this,SLOT(on_contactlistButton_clicked()));
+
 }
 
 CalendarMainWindow::~CalendarMainWindow() {
@@ -35,7 +40,6 @@ void CalendarMainWindow::closeEvent(QCloseEvent* event) {
     saveToFile();
     event->accept();
 }
-
 
 //Private slots
 void CalendarMainWindow::on_appointmentTable_cellClicked(int row, int column) {
@@ -68,6 +72,11 @@ void CalendarMainWindow::on_contactlistButton_clicked() {
 void CalendarMainWindow::on_gotoTodayButton_clicked() {
     ui->calendarWidget->setSelectedDate(QDate::currentDate());
     updateAppointmentTable(QDate::currentDate());
+}
+
+void CalendarMainWindow::on_newAppointmentButton()
+{
+    appointmentUi.show();
 }
 
 void CalendarMainWindow::on_removeAllAppointmentsButton_clicked() {

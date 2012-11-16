@@ -8,7 +8,7 @@
 
 #include "appointment.h"
 #include "contactsgui.h"
-
+#include "appointmentui.h"
 
 namespace Ui {
 class CalendarMainWindow;
@@ -17,7 +17,7 @@ class CalendarMainWindow;
 
 class CalendarMainWindow : public QMainWindow {
     Q_OBJECT
-    
+
 public:
     explicit CalendarMainWindow(QWidget *parent = 0);
     ~CalendarMainWindow();
@@ -32,6 +32,7 @@ private slots:
     void on_gotoTodayButton_clicked();
     void on_removeAllAppointmentsButton_clicked();
     void on_removeAppointmentButton_clicked();
+    void on_newAppointmentButton();
 
 private:
     Ui::CalendarMainWindow *ui;
@@ -45,6 +46,9 @@ private:
     void saveToFile() const;
     void setAppointmentTableHeaders() const;
     void updateAppointmentTable(const QDate&) const;
+
+    AppointmentUi appointmentUi;
+
 };
 
 #endif // CALENDARMAINWINDOW_H

@@ -40,8 +40,8 @@ public:
 
     void setContact(QString contacttxt) { contact = contacttxt; }
 
-
     bool operator<(const Appointment&) const;
+
     QString toString() const;
 
 
