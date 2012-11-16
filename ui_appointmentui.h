@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'appointmentui.ui'
 **
-** Created: Thu 15. Nov 16:44:14 2012
+** Created: Fri 16. Nov 11:01:28 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -65,6 +65,7 @@ public:
     {
         if (AppointmentUi->objectName().isEmpty())
             AppointmentUi->setObjectName(QString::fromUtf8("AppointmentUi"));
+        AppointmentUi->setWindowModality(Qt::ApplicationModal);
         AppointmentUi->resize(252, 315);
         verticalLayout_3 = new QVBoxLayout(AppointmentUi);
         verticalLayout_3->setSpacing(6);
