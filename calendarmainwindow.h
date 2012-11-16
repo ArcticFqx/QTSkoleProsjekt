@@ -22,7 +22,7 @@ public:
     explicit CalendarMainWindow(QWidget *parent = 0);
     ~CalendarMainWindow();
 
-    virtual void closeEvent(QCloseEvent *);
+    virtual void closeEvent(QCloseEvent*);
     
 private slots:
     void on_appointmentTable_cellClicked(int row, int column);

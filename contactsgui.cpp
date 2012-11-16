@@ -34,7 +34,10 @@ void ContactsGui::on_addButton_clicked() {
 
 void ContactsGui::on_closeButton_clicked() {
     saveToFile();
-    emit selectedContact(ui->contactsList->currentItem()->text());
+
+    if (ui->contactsList->currentItem() != NULL) {
+        emit selectedContact(ui->contactsList->currentItem()->text());
+    }
 }
 
 void ContactsGui::on_deleteButton_clicked() {
