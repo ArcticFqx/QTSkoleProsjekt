@@ -46,7 +46,7 @@ void CalendarMainWindow::closeEvent(QCloseEvent* event) {
 
 //Private slots
 void CalendarMainWindow::addAppointment(Appointment appointment) {
-    QDate startDate = appointment.getStartTime().date();
+    QDate startDate = appointment.getStartDateTime().date();
 
     if (map.contains(startDate)) {
         QList<Appointment> list = map.take(startDate);
@@ -137,16 +137,16 @@ void CalendarMainWindow::on_removeAppointmentButton_clicked() {
 //Private methods
 bool CalendarMainWindow::appointmentOverlaps(Appointment newAppointment) const {
     bool overlap = false;
-    QDate startDate = newAppointment.getStartTime().date();
+    QDate startDate = newAppointment.getStartDateTime().date();
 
     if (map.contains(startDate)) {
         QList<Appointment> list = map.value(startDate);
 
         foreach (Appointment current, list) {
-            overlap = (newAppointment.getStartTime() >= current.getStartTime()
-                    && newAppointment.getStartTime() < current.getEndTime())
-                    || (newAppointment.getEndTime() > current.getStartTime()
-                    && newAppointment.getEndTime() <= current.getEndTime());
+            overlap = (newAppointment.getStartDateTime() >= current.getStartDateTime()
+                    && newAppointment.getStartDateTime() < current.getEndDateTime())
+                    || (newAppointment.getEndDateTime() > current.getStartDateTime()
+                    && newAppointment.getEndDateTime() <= current.getEndDateTime());
 
             if (overlap) {
                 break;
@@ -237,8 +237,8 @@ void CalendarMainWindow::updateAppointmentTable(const QDate& date) const {
             Appointment appointment = list.at(i);
             table->insertRow(i);
 
-            QTableWidgetItem* itemStart = new QTableWidgetItem(appointment.getStartTime().toString("HH:mm"));
-            QTableWidgetItem* itemEnd = new QTableWidgetItem(appointment.getEndTime().toString("dd.MM.yy HH:mm"));
+            QTableWidgetItem* itemStart = new QTableWidgetItem(appointment.getStartDateTime().toString("HH:mm"));
+            QTableWidgetItem* itemEnd = new QTableWidgetItem(appointment.getEndDateTime().toString("dd.MM.yy HH:mm"));
             QTableWidgetItem* itemName = new QTableWidgetItem(appointment.getAppointmentName());
 
             itemStart->setFlags(itemStart->flags() ^ Qt::ItemIsEditable);

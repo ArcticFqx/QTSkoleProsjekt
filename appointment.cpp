@@ -11,8 +11,8 @@ Appointment::Appointment() {
 }
 
 Appointment::Appointment(QStringList list) {
-    startTime = QDateTime::fromString(list.at(START));
-    endTime = QDateTime::fromString(list.at(END));
+    startDateTime = QDateTime::fromString(list.at(START));
+    endDateTime = QDateTime::fromString(list.at(END));
     appointmentName = list.at(NAME);
     location = list.at(LOCATION);
     type = list.at(TYPE);
@@ -22,27 +22,27 @@ Appointment::Appointment(QStringList list) {
 
 Appointment::Appointment(QDateTime start, QDateTime end, QString name, QString loc,
         QString typetxt, QString infotxt, QString contacttxt) :
-        startTime(start), endTime(end), appointmentName(name),
+        startDateTime(start), endDateTime(end), appointmentName(name),
         location(loc), type(typetxt), info(infotxt), contact(contacttxt) {
 }
 
 
 bool Appointment::operator<(const Appointment& other) const {
-    if (startTime == other.getStartTime()) {
-        if (endTime == other.getEndTime()) {
+    if (startDateTime == other.getStartDateTime()) {
+        if (endDateTime == other.getEndDateTime()) {
             return appointmentName < other.getAppointmentName();
         }
-        return endTime < other.getEndTime();
+        return endDateTime < other.getEndDateTime();
     }
-    return startTime < other.getStartTime();
+    return startDateTime < other.getStartDateTime();
 }
 
 QString Appointment::getQStringOfType(Attributes attribute) const {
     switch (attribute) {
         case START:
-            return startTime.toString();
+            return startDateTime.toString();
         case END:
-            return endTime.toString();
+            return endDateTime.toString();
         case NAME:
             return appointmentName;
         case LOCATION:
@@ -59,14 +59,14 @@ QString Appointment::getQStringOfType(Attributes attribute) const {
 }
 
 void Appointment::moveDays(int days) {
-    startTime = startTime.addDays(days);
-    endTime = endTime.addDays(days);
+    startDateTime = startDateTime.addDays(days);
+    endDateTime = endDateTime.addDays(days);
 }
 
 QString Appointment::toString() const {
-    QString string = startTime.toString();
+    QString string = startDateTime.toString();
     string.append(SEPARATOR);
-    string.append(endTime.toString());
+    string.append(endDateTime.toString());
     string.append(SEPARATOR);
     string.append(appointmentName);
     string.append(SEPARATOR);
