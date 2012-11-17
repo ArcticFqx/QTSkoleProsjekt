@@ -36,6 +36,8 @@ private slots:
     void on_gotoTodayButton_clicked();
     void on_removeAllAppointmentsButton_clicked();
     void on_removeAppointmentButton_clicked();
+    void on_searchButton_clicked();
+    void on_searchLineEdit_returnPressed();
 
 private:
     Ui::CalendarMainWindow *ui;
@@ -45,8 +47,9 @@ private:
     QFile* file;
 
     bool appointmentOverlaps(Appointment) const;
-    QList<Appointment> find(QString, Appointment::Attributes) const;
+    QList<Appointment> find(QString) const;
     QString getPathToFilename() const;
+    void insertIntoAppointmentTable(QList<Appointment>) const;
     void loadFromFile();
     void saveToFile() const;
     void setAppointmentTableHeaders() const;
