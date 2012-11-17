@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'calendarmainwindow.ui'
 **
-** Created: Fri 16. Nov 13:44:01 2012
+** Created: Sat 17. Nov 16:45:10 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -79,9 +79,11 @@ public:
         addAppointmentButton->setGeometry(QRect(180, 260, 91, 23));
         removeAppointmentButton = new QPushButton(centralwidget);
         removeAppointmentButton->setObjectName(QString::fromUtf8("removeAppointmentButton"));
+        removeAppointmentButton->setEnabled(false);
         removeAppointmentButton->setGeometry(QRect(510, 460, 75, 23));
         editAppointmentButton = new QPushButton(centralwidget);
         editAppointmentButton->setObjectName(QString::fromUtf8("editAppointmentButton"));
+        editAppointmentButton->setEnabled(false);
         editAppointmentButton->setGeometry(QRect(420, 460, 75, 23));
         removeAllAppointmentsButton = new QPushButton(centralwidget);
         removeAllAppointmentsButton->setObjectName(QString::fromUtf8("removeAllAppointmentsButton"));

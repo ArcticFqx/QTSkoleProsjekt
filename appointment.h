@@ -30,8 +30,8 @@ public:
     QString getContact() const { return contact; }
 
 
-    void setStartTime(QDateTime start) { startDateTime = start; }
-    void setEndTime(QDateTime end) { endDateTime = end; }
+    void setStartDateTime(QDateTime start) { startDateTime = start; }
+    void setEndDateTime(QDateTime end) { endDateTime = end; }
 
     void setAppointmentName(QString name) { appointmentName = name; }
     void setLocation(QString loc) { location = loc; }

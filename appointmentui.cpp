@@ -1,7 +1,7 @@
 #include "appointment.h"
 #include "appointmentui.h"
 #include "ui_appointmentui.h"
-
+#include "QDebug"
 
 AppointmentUi::AppointmentUi(QWidget *parent) :
     QWidget(parent),
@@ -12,6 +12,7 @@ AppointmentUi::AppointmentUi(QWidget *parent) :
     connect(ui->radioAnnet,SIGNAL(toggled(bool)),ui->lineEditAnnet,SLOT(setEnabled(bool)));
 
     setDateTimeEditDefaults();
+    modeEdit = false;
 }
 
 AppointmentUi::~AppointmentUi()
@@ -57,15 +58,28 @@ void AppointmentUi::on_buttonBox_accepted()
         appointmentType = ui->lineEditAnnet->text();
     }
 
-    Appointment appointment(ui->dateTimeStart->dateTime(), ui->dateTimeEnd->dateTime(),
-            ui->appointmentName->text(), ui->lineEditLocation->text(), appointmentType,
-            ui->textEdit->toPlainText(), ui->lineEditContact->text());
 
-    int repeat = ui->repeatCheckBox->isChecked() ? ui->repeatSpinBox->value() : 0;
-    emit newAppointment(appointment, repeat);
+    if(modeEdit) {
+        modeEdit = false;
+    } else {
+        Appointment appointment(ui->dateTimeStart->dateTime(), ui->dateTimeEnd->dateTime(),
+                ui->appointmentName->text(), ui->lineEditLocation->text(), appointmentType,
+                ui->textEdit->toPlainText(), ui->lineEditContact->text());
+
+        int repeat = ui->repeatCheckBox->isChecked() ? ui->repeatSpinBox->value() : 0;
+        emit newAppointment(appointment, repeat);
+    }
     close();
 }
 
 void AppointmentUi::on_dateTimeStart_dateTimeChanged(const QDateTime &date) {
     ui->dateTimeEnd->setMinimumDateTime(date);
+}
+
+void AppointmentUi::editAppointment(Appointment currentAppointment)
+{
+    modeEdit = true;
+    ui->appointmentName->setText(currentAppointment.getAppointmentName());
+    ui->dateTimeStart->setDateTime(currentAppointment.getStartDateTime());
+    ui->dateTimeEnd->setDateTime(currentAppointment.getEndDateTime());
 }

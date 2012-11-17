@@ -8,12 +8,12 @@
 #include "appointment.h"
 #include "calendarmainwindow.h"
 #include "ui_calendarmainwindow.h"
-
+#include "QDebug"
 
 CalendarMainWindow::CalendarMainWindow(QWidget *parent) :
         QMainWindow(parent),
         ui(new Ui::CalendarMainWindow) {
-
+    setWindowTitle("Planlegger");
     ui->setupUi(this);
     contactsgui = new ContactsGui();
     appointmentUi = new AppointmentUi();
@@ -22,13 +22,21 @@ CalendarMainWindow::CalendarMainWindow(QWidget *parent) :
 
     setAppointmentTableHeaders();
 
+
     loadFromFile();
+
 
     updateAppointmentTable(ui->calendarWidget->selectedDate());
 
     connect(appointmentUi,SIGNAL(openContactsList()),this,SLOT(on_contactlistButton_clicked()));
     connect(contactsgui, SIGNAL(selectedContact(QString)), appointmentUi, SLOT(setContactLineEditText(QString)));
     connect(appointmentUi, SIGNAL(newAppointment(Appointment, int)), this, SLOT(addAppointmentFromUi(Appointment, int)));
+    connect(ui->actionAddAppointment, SIGNAL(triggered()), this, SLOT(on_addAppointmentButton_clicked()));
+    connect(ui->actionOpenContacts, SIGNAL(triggered()), this, SLOT(on_contactlistButton_clicked()));
+    connect(ui->actionSaveAndExit, SIGNAL(triggered()), this, SLOT(on_closeButton_clicked()));
+    connect(ui->actionDeleteAppointment, SIGNAL(triggered()), this, SLOT(on_removeAppointmentButton_clicked()));
+    connect(ui->actionDeleteAllAppointment, SIGNAL(triggered()), this, SLOT(on_removeAllAppointmentsButton_clicked()));
+    connect(ui->actionEditAppointment, SIGNAL(triggered()), this, SLOT(on_editAppointmentButton_clicked()));
 }
 
 CalendarMainWindow::~CalendarMainWindow() {
@@ -75,25 +83,28 @@ void CalendarMainWindow::addAppointmentFromUi(Appointment appointment, int repea
 
 void CalendarMainWindow::on_addAppointmentButton_clicked() {
     appointmentUi->setDateTimeEditDefaults();
+    appointmentUi->setWindowTitle("Ny avtale");
     appointmentUi->show();
 }
 
+
 void CalendarMainWindow::on_appointmentTable_cellClicked(int row, int column) {
     QDate selectedDate = ui->calendarWidget->selectedDate();
-
     if (map.contains(selectedDate)) {
         QList<Appointment> list = map.value(selectedDate);
-        Appointment appointment = list.at(row);
+        Appointment currentAppointment = list.at(row);
+        ui->editAppointmentButton->setEnabled(true);
 
-        ui->typeLineEdit->setText(appointment.getType());
-        ui->locationLineEdit->setText(appointment.getLocation());
-        ui->contactLineEdit->setText(appointment.getContact());
-        ui->infoLineEdit->setText(appointment.getInfo());
+        ui->typeLineEdit->setText(currentAppointment.getType());
+        ui->locationLineEdit->setText(currentAppointment.getLocation());
+        ui->contactLineEdit->setText(currentAppointment.getContact());
+        ui->infoLineEdit->setText(currentAppointment.getInfo());
     }
 }
 
 void CalendarMainWindow::on_calendarWidget_clicked(const QDate &date) {
     updateAppointmentTable(date);
+    ui->editAppointmentButton->setEnabled(false);
 }
 
 void CalendarMainWindow::on_closeButton_clicked() {
@@ -106,7 +117,13 @@ void CalendarMainWindow::on_contactlistButton_clicked() {
 }
 
 void CalendarMainWindow::on_editAppointmentButton_clicked() {
+    QDate selectedDate = ui->calendarWidget->selectedDate();
+    QList<Appointment> list = map.value(selectedDate);
+    Appointment currentAppointment = list.at(ui->appointmentTable->currentRow());
 
+    appointmentUi->editAppointment(currentAppointment);
+    appointmentUi->setWindowTitle("Rediger avtale");
+    appointmentUi->show();
 }
 
 void CalendarMainWindow::on_gotoTodayButton_clicked() {
@@ -130,6 +147,7 @@ void CalendarMainWindow::on_removeAppointmentButton_clicked() {
         map.insert(selectedDate, list);
 
         updateAppointmentTable(selectedDate);
+
     }
 }
 
