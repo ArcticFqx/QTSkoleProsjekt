@@ -20,13 +20,22 @@ CalendarMainWindow::CalendarMainWindow(QWidget *parent) :
     file = new QFile(getPathToFilename());
 
     setAppointmentTableHeaders();
+
+
     loadFromFile();
+
+
     updateAppointmentTable(ui->calendarWidget->selectedDate());
 
     connect(appointmentUi,SIGNAL(openContactsList()),this,SLOT(on_contactlistButton_clicked()));
     connect(contactsgui, SIGNAL(selectedContact(QString)), appointmentUi, SLOT(setContactLineEditText(QString)));
     connect(appointmentUi, SIGNAL(newAppointment(Appointment, int)), this, SLOT(addAppointment(Appointment, int)));
-
+    connect(ui->actionAddAppointment, SIGNAL(triggered()), this, SLOT(on_addAppointmentButton_clicked()));
+    connect(ui->actionOpenContacts, SIGNAL(triggered()), this, SLOT(on_contactlistButton_clicked()));
+    connect(ui->actionSaveAndExit, SIGNAL(triggered()), this, SLOT(on_closeButton_clicked()));
+    connect(ui->actionDeleteAppointment, SIGNAL(triggered()), this, SLOT(on_removeAppointmentButton_clicked()));
+    connect(ui->actionDeleteAllAppointment, SIGNAL(triggered()), this, SLOT(on_removeAllAppointmentsButton_clicked()));
+    connect(ui->actionEditAppointment, SIGNAL(triggered()), this, SLOT(on_editAppointmentButton_clicked()));
 }
 
 CalendarMainWindow::~CalendarMainWindow() {
