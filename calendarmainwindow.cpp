@@ -35,7 +35,7 @@ CalendarMainWindow::CalendarMainWindow(QWidget *parent) :
     connect(ui->actionSaveAndExit, SIGNAL(triggered()), this, SLOT(on_closeButton_clicked()));
     connect(ui->actionDeleteAppointment, SIGNAL(triggered()), this, SLOT(on_removeAppointmentButton_clicked()));
     connect(ui->actionDeleteAllAppointment, SIGNAL(triggered()), this, SLOT(on_removeAllAppointmentsButton_clicked()));
-
+    connect(ui->actionEditAppointment, SIGNAL(triggered()), this, SLOT(on_editAppointmentButton_clicked()));
 }
 
 CalendarMainWindow::~CalendarMainWindow() {
