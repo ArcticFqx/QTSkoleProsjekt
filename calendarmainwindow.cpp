@@ -21,7 +21,9 @@ CalendarMainWindow::CalendarMainWindow(QWidget *parent) :
 
     setAppointmentTableHeaders();
 
+
     loadFromFile();
+
 
     updateAppointmentTable(ui->calendarWidget->selectedDate());
 
@@ -33,6 +35,7 @@ CalendarMainWindow::CalendarMainWindow(QWidget *parent) :
     connect(ui->actionSaveAndExit, SIGNAL(triggered()), this, SLOT(on_closeButton_clicked()));
     connect(ui->actionDeleteAppointment, SIGNAL(triggered()), this, SLOT(on_removeAppointmentButton_clicked()));
     connect(ui->actionDeleteAllAppointment, SIGNAL(triggered()), this, SLOT(on_removeAllAppointmentsButton_clicked()));
+
 
 }
 
