@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'appointmentui.ui'
 **
-** Created: Sat 17. Nov 15:58:06 2012
+** Created: Sat 17. Nov 17:50:17 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -59,7 +59,7 @@ public:
     QLabel *label_2;
     QLineEdit *lineEditLocation;
     QHBoxLayout *horizontalLayout_3;
-    QLabel *label_3;
+    QLabel *labelContact;
     QLineEdit *lineEditContact;
     QToolButton *buttonContactsList;
     QTextEdit *textEdit;
@@ -207,10 +207,10 @@ public:
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        label_3 = new QLabel(layoutWidget);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        labelContact = new QLabel(layoutWidget);
+        labelContact->setObjectName(QString::fromUtf8("labelContact"));
 
-        horizontalLayout_3->addWidget(label_3);
+        horizontalLayout_3->addWidget(labelContact);
 
         lineEditContact = new QLineEdit(layoutWidget);
         lineEditContact->setObjectName(QString::fromUtf8("lineEditContact"));
@@ -259,7 +259,7 @@ public:
         radioMote->setText(QApplication::translate("AppointmentUi", "M\303\270te", 0, QApplication::UnicodeUTF8));
         radioAnnet->setText(QApplication::translate("AppointmentUi", "Annet", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("AppointmentUi", "Sted", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("AppointmentUi", "Kontakter", 0, QApplication::UnicodeUTF8));
+        labelContact->setText(QApplication::translate("AppointmentUi", "Kontakter", 0, QApplication::UnicodeUTF8));
         buttonContactsList->setText(QApplication::translate("AppointmentUi", "...", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

@@ -44,7 +44,7 @@ void CalendarMainWindow::closeEvent(QCloseEvent* event) {
 
 //Private slots
 void CalendarMainWindow::addAppointment(Appointment appointment) {
-    QDate startDate = appointment.getStartTime().date();
+    QDate startDate = appointment.getStartDateTime().date();
 
     if (map.contains(startDate)) {
         QList<Appointment> list = map.take(startDate);
@@ -75,13 +75,9 @@ void CalendarMainWindow::on_addAppointmentButton_clicked() {
 
 void CalendarMainWindow::on_appointmentTable_cellClicked(int row, int column) {
     QDate selectedDate = ui->calendarWidget->selectedDate();
-
     if (map.contains(selectedDate)) {
         QList<Appointment> list = map.value(selectedDate);
         Appointment currentAppointment = list.at(row);
-
-        this->selectedRow = row;
-
         ui->editAppointmentButton->setEnabled(true);
 
         ui->typeLineEdit->setText(currentAppointment.getType());
@@ -93,6 +89,7 @@ void CalendarMainWindow::on_appointmentTable_cellClicked(int row, int column) {
 
 void CalendarMainWindow::on_calendarWidget_clicked(const QDate &date) {
     updateAppointmentTable(date);
+    ui->editAppointmentButton->setEnabled(false);
 }
 
 void CalendarMainWindow::on_closeButton_clicked() {
@@ -106,12 +103,12 @@ void CalendarMainWindow::on_contactlistButton_clicked() {
 
 void CalendarMainWindow::on_editAppointmentButton_clicked()
 {
-    appointmentUi->setWindowTitle("Rediger avtale");
     QDate selectedDate = ui->calendarWidget->selectedDate();
     QList<Appointment> list = map.value(selectedDate);
-    Appointment currentAppointment = list[selectedRow];
+    Appointment currentAppointment = list.at(ui->appointmentTable->currentRow());
 
-    appointmentUi->editAppointment(&currentAppointment);
+    appointmentUi->editAppointment(currentAppointment);
+    appointmentUi->setWindowTitle("Rediger avtale");
     appointmentUi->show();
 }
 
@@ -207,8 +204,8 @@ void CalendarMainWindow::updateAppointmentTable(const QDate& date) const {
             Appointment appointment = list.at(i);
             table->insertRow(i);
 
-            QTableWidgetItem* itemStart = new QTableWidgetItem(appointment.getStartTime().toString("HH:mm"));
-            QTableWidgetItem* itemEnd = new QTableWidgetItem(appointment.getEndTime().toString("dd.MM.yy HH:mm"));
+            QTableWidgetItem* itemStart = new QTableWidgetItem(appointment.getStartDateTime().toString("HH:mm"));
+            QTableWidgetItem* itemEnd = new QTableWidgetItem(appointment.getEndDateTime().toString("dd.MM.yy HH:mm"));
             QTableWidgetItem* itemName = new QTableWidgetItem(appointment.getAppointmentName());
 
             itemStart->setFlags(itemStart->flags() ^ Qt::ItemIsEditable);

@@ -17,7 +17,7 @@ class AppointmentUi : public QWidget
 public:
     explicit AppointmentUi(QWidget *parent = 0);
     ~AppointmentUi();
-    void editAppointment(Appointment * app);
+    void editAppointment(Appointment app);
 
 public slots:
     void setContactLineEditText(QString);
@@ -28,7 +28,6 @@ private slots:
 private:
     Ui::AppointmentUi *ui;
     bool modeEdit;
-    Appointment * currentAppointment;
     void setDateTimeEditDefaults() const;
 
 signals:

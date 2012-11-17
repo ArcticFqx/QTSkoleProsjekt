@@ -49,8 +49,6 @@ void AppointmentUi::on_buttonBox_accepted()
 
     if(modeEdit)
     {
-        currentAppointment->setAppointmentName("test");
-        qDebug() << (ui->appointmentName->text());
         modeEdit = false;
     }
     else
@@ -73,9 +71,10 @@ void AppointmentUi::setDateTimeEditDefaults() const {
     ui->dateTimeEnd->setTime(time);
 }
 
-void AppointmentUi::editAppointment(Appointment *currentAppointment)
+void AppointmentUi::editAppointment(Appointment currentAppointment)
 {
     modeEdit = true;
-    this->currentAppointment = currentAppointment;
-    ui->appointmentName->setText(currentAppointment->getAppointmentName());
+    ui->appointmentName->setText(currentAppointment.getAppointmentName());
+    ui->dateTimeStart->setDateTime(currentAppointment.getStartDateTime());
+    ui->dateTimeEnd->setDateTime(currentAppointment.getEndDateTime());
 }

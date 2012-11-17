@@ -19,8 +19,8 @@ public:
                 QString typetxt, QString infotxt, QString contacttxt);
 
 
-    QDateTime getStartTime() const { return startTime; }
-    QDateTime getEndTime() const { return endTime; }
+    QDateTime getStartDateTime() const { return startDateTime; }
+    QDateTime getEndDateTime() const { return endDateTime; }
 
     QString getAppointmentName() const { return appointmentName; }
     QString getLocation() const { return location; }
@@ -30,8 +30,8 @@ public:
     QString getContact() const { return contact; }
 
 
-    void setStartTime(QDateTime start) { startTime = start; }
-    void setEndTime(QDateTime end) { endTime = end; }
+    void setDateStartDateTime(QDateTime start) { startDateTime = start; }
+    void setEndDateTime(QDateTime end) { endDateTime = end; }
 
     void setAppointmentName(QString name) { appointmentName = name; }
     void setLocation(QString loc) { location = loc; }
@@ -49,8 +49,8 @@ public:
     static const QString SEPARATOR;
 
 private:
-    QDateTime startTime;
-    QDateTime endTime;
+    QDateTime startDateTime;
+    QDateTime endDateTime;
 
     QString appointmentName;
     QString location;

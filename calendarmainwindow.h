@@ -44,8 +44,6 @@ private:
     QMap<QDate, QList<Appointment> >  map;
     QFile* file;
 
-    int selectedRow;
-
     QString getPathToFilename() const;
     void loadFromFile();
     void saveToFile() const;
