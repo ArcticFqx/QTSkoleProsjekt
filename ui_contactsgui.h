@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'contactsgui.ui'
 **
-** Created: Fri 16. Nov 15:19:17 2012
+** Created: Sat 17. Nov 15:27:31 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

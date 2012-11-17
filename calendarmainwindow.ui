@@ -83,6 +83,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="removeAppointmentButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>510</x>
@@ -96,6 +99,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="editAppointmentButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>420</x>

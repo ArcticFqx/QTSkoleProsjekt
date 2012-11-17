@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'appointmentui.ui'
 **
-** Created: Fri 16. Nov 15:18:16 2012
+** Created: Sat 17. Nov 15:58:06 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -14,6 +14,7 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QCheckBox>
 #include <QtGui/QDateTimeEdit>
 #include <QtGui/QDialogButtonBox>
 #include <QtGui/QHBoxLayout>
@@ -21,6 +22,7 @@
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
 #include <QtGui/QRadioButton>
+#include <QtGui/QSpinBox>
 #include <QtGui/QTextEdit>
 #include <QtGui/QToolButton>
 #include <QtGui/QVBoxLayout>
@@ -31,7 +33,7 @@ QT_BEGIN_NAMESPACE
 class Ui_AppointmentUi
 {
 public:
-    QVBoxLayout *verticalLayout_3;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label;
@@ -42,9 +44,12 @@ public:
     QHBoxLayout *horizontalLayout_6;
     QLabel *label_5;
     QDateTimeEdit *dateTimeEnd;
+    QHBoxLayout *horizontalLayout_8;
+    QCheckBox *repeatCheckBox;
+    QSpinBox *repeatSpinBox;
     QHBoxLayout *horizontalLayout_7;
     QRadioButton *radioUndervisning;
-    QRadioButton *radioButton_3;
+    QRadioButton *radioLab;
     QRadioButton *radioMote;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
@@ -52,10 +57,10 @@ public:
     QLineEdit *lineEditAnnet;
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_2;
-    QLineEdit *lineEdit_2;
+    QLineEdit *lineEditLocation;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_3;
-    QLineEdit *lineEdit;
+    QLineEdit *lineEditContact;
     QToolButton *buttonContactsList;
     QTextEdit *textEdit;
     QDialogButtonBox *buttonBox;
@@ -65,23 +70,24 @@ public:
         if (AppointmentUi->objectName().isEmpty())
             AppointmentUi->setObjectName(QString::fromUtf8("AppointmentUi"));
         AppointmentUi->setWindowModality(Qt::ApplicationModal);
-        AppointmentUi->resize(252, 315);
-        verticalLayout_3 = new QVBoxLayout(AppointmentUi);
-        verticalLayout_3->setSpacing(6);
-        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        verticalLayout_2 = new QVBoxLayout();
+        AppointmentUi->resize(301, 381);
+        layoutWidget = new QWidget(AppointmentUi);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(10, 10, 281, 361));
+        verticalLayout_2 = new QVBoxLayout(layoutWidget);
         verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        label = new QLabel(AppointmentUi);
+        label = new QLabel(layoutWidget);
         label->setObjectName(QString::fromUtf8("label"));
 
         horizontalLayout_2->addWidget(label);
 
-        appointmentName = new QLineEdit(AppointmentUi);
+        appointmentName = new QLineEdit(layoutWidget);
         appointmentName->setObjectName(QString::fromUtf8("appointmentName"));
 
         horizontalLayout_2->addWidget(appointmentName);
@@ -92,12 +98,12 @@ public:
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setSpacing(6);
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        label_4 = new QLabel(AppointmentUi);
+        label_4 = new QLabel(layoutWidget);
         label_4->setObjectName(QString::fromUtf8("label_4"));
 
         horizontalLayout_5->addWidget(label_4);
 
-        dateTimeStart = new QDateTimeEdit(AppointmentUi);
+        dateTimeStart = new QDateTimeEdit(layoutWidget);
         dateTimeStart->setObjectName(QString::fromUtf8("dateTimeStart"));
 
         horizontalLayout_5->addWidget(dateTimeStart);
@@ -108,12 +114,12 @@ public:
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setSpacing(6);
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
-        label_5 = new QLabel(AppointmentUi);
+        label_5 = new QLabel(layoutWidget);
         label_5->setObjectName(QString::fromUtf8("label_5"));
 
         horizontalLayout_6->addWidget(label_5);
 
-        dateTimeEnd = new QDateTimeEdit(AppointmentUi);
+        dateTimeEnd = new QDateTimeEdit(layoutWidget);
         dateTimeEnd->setObjectName(QString::fromUtf8("dateTimeEnd"));
 
         horizontalLayout_6->addWidget(dateTimeEnd);
@@ -121,20 +127,37 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout_6);
 
+        horizontalLayout_8 = new QHBoxLayout();
+        horizontalLayout_8->setSpacing(6);
+        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
+        repeatCheckBox = new QCheckBox(layoutWidget);
+        repeatCheckBox->setObjectName(QString::fromUtf8("repeatCheckBox"));
+
+        horizontalLayout_8->addWidget(repeatCheckBox);
+
+        repeatSpinBox = new QSpinBox(layoutWidget);
+        repeatSpinBox->setObjectName(QString::fromUtf8("repeatSpinBox"));
+        repeatSpinBox->setEnabled(false);
+
+        horizontalLayout_8->addWidget(repeatSpinBox);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_8);
+
         horizontalLayout_7 = new QHBoxLayout();
         horizontalLayout_7->setSpacing(6);
         horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
-        radioUndervisning = new QRadioButton(AppointmentUi);
+        radioUndervisning = new QRadioButton(layoutWidget);
         radioUndervisning->setObjectName(QString::fromUtf8("radioUndervisning"));
 
         horizontalLayout_7->addWidget(radioUndervisning);
 
-        radioButton_3 = new QRadioButton(AppointmentUi);
-        radioButton_3->setObjectName(QString::fromUtf8("radioButton_3"));
+        radioLab = new QRadioButton(layoutWidget);
+        radioLab->setObjectName(QString::fromUtf8("radioLab"));
 
-        horizontalLayout_7->addWidget(radioButton_3);
+        horizontalLayout_7->addWidget(radioLab);
 
-        radioMote = new QRadioButton(AppointmentUi);
+        radioMote = new QRadioButton(layoutWidget);
         radioMote->setObjectName(QString::fromUtf8("radioMote"));
 
         horizontalLayout_7->addWidget(radioMote);
@@ -148,12 +171,12 @@ public:
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        radioAnnet = new QRadioButton(AppointmentUi);
+        radioAnnet = new QRadioButton(layoutWidget);
         radioAnnet->setObjectName(QString::fromUtf8("radioAnnet"));
 
         horizontalLayout->addWidget(radioAnnet);
 
-        lineEditAnnet = new QLineEdit(AppointmentUi);
+        lineEditAnnet = new QLineEdit(layoutWidget);
         lineEditAnnet->setObjectName(QString::fromUtf8("lineEditAnnet"));
         lineEditAnnet->setEnabled(false);
 
@@ -168,15 +191,15 @@ public:
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setSpacing(6);
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        label_2 = new QLabel(AppointmentUi);
+        label_2 = new QLabel(layoutWidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
 
         horizontalLayout_4->addWidget(label_2);
 
-        lineEdit_2 = new QLineEdit(AppointmentUi);
-        lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
+        lineEditLocation = new QLineEdit(layoutWidget);
+        lineEditLocation->setObjectName(QString::fromUtf8("lineEditLocation"));
 
-        horizontalLayout_4->addWidget(lineEdit_2);
+        horizontalLayout_4->addWidget(lineEditLocation);
 
 
         verticalLayout_2->addLayout(horizontalLayout_4);
@@ -184,19 +207,19 @@ public:
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        label_3 = new QLabel(AppointmentUi);
+        label_3 = new QLabel(layoutWidget);
         label_3->setObjectName(QString::fromUtf8("label_3"));
 
         horizontalLayout_3->addWidget(label_3);
 
-        lineEdit = new QLineEdit(AppointmentUi);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setEnabled(false);
-        lineEdit->setReadOnly(true);
+        lineEditContact = new QLineEdit(layoutWidget);
+        lineEditContact->setObjectName(QString::fromUtf8("lineEditContact"));
+        lineEditContact->setEnabled(false);
+        lineEditContact->setReadOnly(true);
 
-        horizontalLayout_3->addWidget(lineEdit);
+        horizontalLayout_3->addWidget(lineEditContact);
 
-        buttonContactsList = new QToolButton(AppointmentUi);
+        buttonContactsList = new QToolButton(layoutWidget);
         buttonContactsList->setObjectName(QString::fromUtf8("buttonContactsList"));
 
         horizontalLayout_3->addWidget(buttonContactsList);
@@ -204,12 +227,12 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout_3);
 
-        textEdit = new QTextEdit(AppointmentUi);
+        textEdit = new QTextEdit(layoutWidget);
         textEdit->setObjectName(QString::fromUtf8("textEdit"));
 
         verticalLayout_2->addWidget(textEdit);
 
-        buttonBox = new QDialogButtonBox(AppointmentUi);
+        buttonBox = new QDialogButtonBox(layoutWidget);
         buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
         buttonBox->setMaximumSize(QSize(16777215, 16777215));
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
@@ -217,12 +240,9 @@ public:
         verticalLayout_2->addWidget(buttonBox);
 
 
-        verticalLayout_3->addLayout(verticalLayout_2);
-
-
         retranslateUi(AppointmentUi);
-        QObject::connect(buttonBox, SIGNAL(accepted()), AppointmentUi, SLOT(close()));
         QObject::connect(buttonBox, SIGNAL(rejected()), AppointmentUi, SLOT(close()));
+        QObject::connect(repeatCheckBox, SIGNAL(toggled(bool)), repeatSpinBox, SLOT(setEnabled(bool)));
 
         QMetaObject::connectSlotsByName(AppointmentUi);
     } // setupUi
@@ -233,8 +253,9 @@ public:
         label->setText(QApplication::translate("AppointmentUi", "Navn", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("AppointmentUi", "Start", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("AppointmentUi", "Slutt", 0, QApplication::UnicodeUTF8));
+        repeatCheckBox->setText(QApplication::translate("AppointmentUi", "Gjenta i (antall uker):", 0, QApplication::UnicodeUTF8));
         radioUndervisning->setText(QApplication::translate("AppointmentUi", "Undervisning", 0, QApplication::UnicodeUTF8));
-        radioButton_3->setText(QApplication::translate("AppointmentUi", "Laboratorium", 0, QApplication::UnicodeUTF8));
+        radioLab->setText(QApplication::translate("AppointmentUi", "Laboratorium", 0, QApplication::UnicodeUTF8));
         radioMote->setText(QApplication::translate("AppointmentUi", "M\303\270te", 0, QApplication::UnicodeUTF8));
         radioAnnet->setText(QApplication::translate("AppointmentUi", "Annet", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("AppointmentUi", "Sted", 0, QApplication::UnicodeUTF8));
