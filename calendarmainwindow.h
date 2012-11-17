@@ -22,7 +22,6 @@ public:
     explicit CalendarMainWindow(QWidget *parent = 0);
     ~CalendarMainWindow();
 
-    bool appointmentOverlaps(Appointment) const;
     virtual void closeEvent(QCloseEvent*);
     
 private slots:
@@ -45,6 +44,8 @@ private:
     QMap<QDate, QList<Appointment> >  map;
     QFile* file;
 
+    bool appointmentOverlaps(Appointment) const;
+    QList<Appointment> find(QString, Appointment::Attributes) const;
     QString getPathToFilename() const;
     void loadFromFile();
     void saveToFile() const;

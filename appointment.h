@@ -42,6 +42,7 @@ public:
 
     bool operator<(const Appointment&) const;
 
+    QString getQStringOfType(Attributes) const;
     void moveDays(int);
     QString toString() const;
 

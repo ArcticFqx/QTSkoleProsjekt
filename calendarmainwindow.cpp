@@ -39,28 +39,6 @@ CalendarMainWindow::~CalendarMainWindow() {
 
 
 //Public methods
-bool CalendarMainWindow::appointmentOverlaps(Appointment newAppointment) const {
-    bool overlap = false;
-    QDate startDate = newAppointment.getStartTime().date();
-
-    if (map.contains(startDate)) {
-        QList<Appointment> list = map.value(startDate);
-
-        foreach (Appointment current, list) {
-            overlap = (newAppointment.getStartTime() >= current.getStartTime()
-                    && newAppointment.getStartTime() < current.getEndTime())
-                    || (newAppointment.getEndTime() > current.getStartTime()
-                    && newAppointment.getEndTime() <= current.getEndTime());
-
-            if (overlap) {
-                break;
-            }
-        }
-    }
-
-    return overlap;
-}
-
 void CalendarMainWindow::closeEvent(QCloseEvent* event) {
     saveToFile();
     event->accept();
@@ -157,6 +135,43 @@ void CalendarMainWindow::on_removeAppointmentButton_clicked() {
 
 
 //Private methods
+bool CalendarMainWindow::appointmentOverlaps(Appointment newAppointment) const {
+    bool overlap = false;
+    QDate startDate = newAppointment.getStartTime().date();
+
+    if (map.contains(startDate)) {
+        QList<Appointment> list = map.value(startDate);
+
+        foreach (Appointment current, list) {
+            overlap = (newAppointment.getStartTime() >= current.getStartTime()
+                    && newAppointment.getStartTime() < current.getEndTime())
+                    || (newAppointment.getEndTime() > current.getStartTime()
+                    && newAppointment.getEndTime() <= current.getEndTime());
+
+            if (overlap) {
+                break;
+            }
+        }
+    }
+
+    return overlap;
+}
+
+QList<Appointment> CalendarMainWindow::find(QString key, Appointment::Attributes type) const {
+    QList<Appointment> resultsList;
+
+    foreach (QList<Appointment> currentList, map) {
+        foreach (Appointment appointment, currentList) {
+            if (appointment.getQStringOfType(type).contains(key, Qt::CaseInsensitive)) {
+                resultsList << appointment;
+            }
+        }
+    }
+
+    qSort(resultsList);
+    return resultsList;
+}
+
 QString CalendarMainWindow::getPathToFilename() const {
     QString path = QApplication::applicationDirPath();
     path.append("/");
