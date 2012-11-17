@@ -32,6 +32,7 @@ private slots:
     void on_calendarWidget_clicked(const QDate &date);
     void on_closeButton_clicked();
     void on_contactlistButton_clicked();
+    void on_editAppointmentButton_clicked();
     void on_gotoTodayButton_clicked();
     void on_removeAllAppointmentsButton_clicked();
     void on_removeAppointmentButton_clicked();
@@ -42,6 +43,8 @@ private:
     AppointmentUi* appointmentUi;
     QMap<QDate, QList<Appointment> >  map;
     QFile* file;
+
+    int selectedRow;
 
     QString getPathToFilename() const;
     void loadFromFile();

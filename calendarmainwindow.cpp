@@ -7,12 +7,12 @@
 #include "appointment.h"
 #include "calendarmainwindow.h"
 #include "ui_calendarmainwindow.h"
-
+#include "QDebug"
 
 CalendarMainWindow::CalendarMainWindow(QWidget *parent) :
         QMainWindow(parent),
         ui(new Ui::CalendarMainWindow) {
-
+    setWindowTitle("Planlegger");
     ui->setupUi(this);
     contactsgui = new ContactsGui();
     appointmentUi = new AppointmentUi();
@@ -77,20 +77,26 @@ void CalendarMainWindow::addAppointment(Appointment appointment, int repeat) {
 }
 
 void CalendarMainWindow::on_addAppointmentButton_clicked() {
+    appointmentUi->setWindowTitle("Ny avtale");
     appointmentUi->show();
 }
+
 
 void CalendarMainWindow::on_appointmentTable_cellClicked(int row, int column) {
     QDate selectedDate = ui->calendarWidget->selectedDate();
 
     if (map.contains(selectedDate)) {
         QList<Appointment> list = map.value(selectedDate);
-        Appointment appointment = list.at(row);
+        Appointment currentAppointment = list.at(row);
 
-        ui->typeLineEdit->setText(appointment.getType());
-        ui->locationLineEdit->setText(appointment.getLocation());
-        ui->contactLineEdit->setText(appointment.getContact());
-        ui->infoLineEdit->setText(appointment.getInfo());
+        this->selectedRow = row;
+
+        ui->editAppointmentButton->setEnabled(true);
+
+        ui->typeLineEdit->setText(currentAppointment.getType());
+        ui->locationLineEdit->setText(currentAppointment.getLocation());
+        ui->contactLineEdit->setText(currentAppointment.getContact());
+        ui->infoLineEdit->setText(currentAppointment.getInfo());
     }
 }
 
@@ -105,6 +111,17 @@ void CalendarMainWindow::on_closeButton_clicked() {
 
 void CalendarMainWindow::on_contactlistButton_clicked() {
     contactsgui->show();
+}
+
+void CalendarMainWindow::on_editAppointmentButton_clicked()
+{
+    appointmentUi->setWindowTitle("Rediger avtale");
+    QDate selectedDate = ui->calendarWidget->selectedDate();
+    QList<Appointment> list = map.value(selectedDate);
+    Appointment currentAppointment = list[selectedRow];
+
+    appointmentUi->editAppointment(&currentAppointment);
+    appointmentUi->show();
 }
 
 void CalendarMainWindow::on_gotoTodayButton_clicked() {
@@ -128,6 +145,7 @@ void CalendarMainWindow::on_removeAppointmentButton_clicked() {
         map.insert(selectedDate, list);
 
         updateAppointmentTable(selectedDate);
+
     }
 }
 
