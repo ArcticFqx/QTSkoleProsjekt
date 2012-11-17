@@ -18,16 +18,17 @@ public:
     explicit AppointmentUi(QWidget *parent = 0);
     ~AppointmentUi();
 
+    void setDateTimeEditDefaults() const;
+
 public slots:
     void setContactLineEditText(QString);
 
 private slots:
     void on_buttonBox_accepted();
+    void on_dateTimeStart_dateTimeChanged(const QDateTime &date);
 
 private:
     Ui::AppointmentUi *ui;
-
-    void setDateTimeEditDefaults() const;
 
 signals:
     void newAppointment(Appointment, int);

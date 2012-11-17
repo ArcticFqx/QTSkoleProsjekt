@@ -22,16 +22,18 @@ public:
     explicit CalendarMainWindow(QWidget *parent = 0);
     ~CalendarMainWindow();
 
+    bool appointmentOverlaps(Appointment) const;
     virtual void closeEvent(QCloseEvent*);
     
 private slots:
     void addAppointment(Appointment);
-    void addAppointment(Appointment, int);
+    void addAppointmentFromUi(Appointment, int);
     void on_addAppointmentButton_clicked();
     void on_appointmentTable_cellClicked(int row, int column);
     void on_calendarWidget_clicked(const QDate &date);
     void on_closeButton_clicked();
     void on_contactlistButton_clicked();
+    void on_editAppointmentButton_clicked();
     void on_gotoTodayButton_clicked();
     void on_removeAllAppointmentsButton_clicked();
     void on_removeAppointmentButton_clicked();

@@ -2,6 +2,7 @@
 #include <QCloseEvent>
 #include <QDateTime>
 #include <QDebug>
+#include <QMessageBox>
 #include <QTextStream>
 
 #include "appointment.h"
@@ -27,7 +28,7 @@ CalendarMainWindow::CalendarMainWindow(QWidget *parent) :
 
     connect(appointmentUi,SIGNAL(openContactsList()),this,SLOT(on_contactlistButton_clicked()));
     connect(contactsgui, SIGNAL(selectedContact(QString)), appointmentUi, SLOT(setContactLineEditText(QString)));
-    connect(appointmentUi, SIGNAL(newAppointment(Appointment, int)), this, SLOT(addAppointment(Appointment, int)));
+    connect(appointmentUi, SIGNAL(newAppointment(Appointment, int)), this, SLOT(addAppointmentFromUi(Appointment, int)));
 }
 
 CalendarMainWindow::~CalendarMainWindow() {
@@ -38,6 +39,28 @@ CalendarMainWindow::~CalendarMainWindow() {
 
 
 //Public methods
+bool CalendarMainWindow::appointmentOverlaps(Appointment newAppointment) const {
+    bool overlap = false;
+    QDate startDate = newAppointment.getStartTime().date();
+
+    if (map.contains(startDate)) {
+        QList<Appointment> list = map.value(startDate);
+
+        foreach (Appointment current, list) {
+            overlap = (newAppointment.getStartTime() >= current.getStartTime()
+                    && newAppointment.getStartTime() < current.getEndTime())
+                    || (newAppointment.getEndTime() > current.getStartTime()
+                    && newAppointment.getEndTime() <= current.getEndTime());
+
+            if (overlap) {
+                break;
+            }
+        }
+    }
+
+    return overlap;
+}
+
 void CalendarMainWindow::closeEvent(QCloseEvent* event) {
     saveToFile();
     event->accept();
@@ -59,7 +82,11 @@ void CalendarMainWindow::addAppointment(Appointment appointment) {
     }
 }
 
-void CalendarMainWindow::addAppointment(Appointment appointment, int repeat) {
+void CalendarMainWindow::addAppointmentFromUi(Appointment appointment, int repeat) {
+    if (appointmentOverlaps(appointment)) {
+        QMessageBox::information(this, "", "Denne avtalen overlapper en annen avtale.");
+    }
+
     addAppointment(appointment);
 
     for (int i=0; i<repeat; i++) {
@@ -69,6 +96,7 @@ void CalendarMainWindow::addAppointment(Appointment appointment, int repeat) {
 }
 
 void CalendarMainWindow::on_addAppointmentButton_clicked() {
+    appointmentUi->setDateTimeEditDefaults();
     appointmentUi->show();
 }
 
@@ -97,6 +125,10 @@ void CalendarMainWindow::on_closeButton_clicked() {
 
 void CalendarMainWindow::on_contactlistButton_clicked() {
     contactsgui->show();
+}
+
+void CalendarMainWindow::on_editAppointmentButton_clicked() {
+
 }
 
 void CalendarMainWindow::on_gotoTodayButton_clicked() {
