@@ -10,13 +10,13 @@ class Appointment {
 
 public:
     enum Attributes {
-        START, END, NAME, LOCATION, TYPE, INFO, CONTACT
+        START, END, NAME, LOCATION, ABSENCE, TYPE, INFO, CONTACT
     };
 
     Appointment();
     Appointment(QStringList);
     Appointment(QDateTime start, QDateTime end, QString name, QString loc,
-                QString typetxt, QString infotxt, QString contacttxt);
+                QString absence, QString typetxt, QString infotxt, QString contacttxt);
 
 
     QDateTime getStartDateTime() const { return startDateTime; }
@@ -24,6 +24,7 @@ public:
 
     QString getAppointmentName() const { return appointmentName; }
     QString getLocation() const { return location; }
+    QString getAbsence() const { return absence; }
     QString getType() const { return type; }
     QString getInfo() const { return info; }
 
@@ -35,6 +36,7 @@ public:
 
     void setAppointmentName(QString name) { appointmentName = name; }
     void setLocation(QString loc) { location = loc; }
+    void setAbsence(QString abs ) { absence = abs; }
     void setType(QString typetxt) { type = typetxt; }
     void setInfo(QString infotxt) { info = infotxt; }
 
@@ -54,6 +56,7 @@ private:
 
     QString appointmentName;
     QString location;
+    QString absence;
     QString type;
     QString info;
 

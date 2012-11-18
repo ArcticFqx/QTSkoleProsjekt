@@ -24,6 +24,7 @@ public slots:
 
 private slots:
     void on_buttonBox_accepted();
+    void on_radioAvtale_toggled(bool checked);
 
 private:
     Ui::AppointmentUi *ui;

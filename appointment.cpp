@@ -2,7 +2,7 @@
 #include <QTextStream>
 
 #include "appointment.h"
-
+#include "QDebug"
 
 const QString Appointment::SEPARATOR = "|";
 
@@ -15,14 +15,15 @@ Appointment::Appointment(QStringList list) {
     endDateTime = QDateTime::fromString(list.at(END));
     appointmentName = list.at(NAME);
     location = list.at(LOCATION);
+    absence = list.at(ABSENCE);
     type = list.at(TYPE);
     info = list.at(INFO);
     contact = list.at(CONTACT);
 }
 
 Appointment::Appointment(QDateTime start, QDateTime end, QString name, QString loc,
-        QString typetxt, QString infotxt, QString contacttxt) :
-        startDateTime(start), endDateTime(end), appointmentName(name),
+        QString absence, QString typetxt, QString infotxt, QString contacttxt) :
+    startDateTime(start), endDateTime(end), appointmentName(name), absence(absence),
         location(loc), type(typetxt), info(infotxt), contact(contacttxt) {
 }
 
@@ -51,11 +52,14 @@ QString Appointment::toString() const {
     string.append(SEPARATOR);
     string.append(location);
     string.append(SEPARATOR);
+    string.append(absence);
+    string.append(SEPARATOR);
     string.append(type);
     string.append(SEPARATOR);
     string.append(info);
     string.append(SEPARATOR);
     string.append(contact);
 
+    qDebug() << string << endl;
     return string;
 }
