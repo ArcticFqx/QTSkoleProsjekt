@@ -18,6 +18,7 @@ public:
     explicit AppointmentUi(QWidget *parent = 0);
     ~AppointmentUi();
     void editAppointment(Appointment app);
+    void setupAppointmentUi();
 
 public slots:
     void setContactLineEditText(QString);

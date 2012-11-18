@@ -73,6 +73,16 @@ void AppointmentUi::setDateTimeEditDefaults() const {
     ui->dateTimeEnd->setTime(time);
 }
 
+void AppointmentUi::setupAppointmentUi()
+{
+    setWindowTitle("Ny avtale");
+    ui->appointmentName->setText("");
+    ui->radioAvtale->setChecked(true);
+    ui->radioUndervisning->setChecked(true);
+    ui->lineEditLocation->setText("");
+    ui->lineEditAnnet->setText("");
+}
+
 void AppointmentUi::editAppointment(Appointment currentAppointment)
 {
     modeEdit = true;

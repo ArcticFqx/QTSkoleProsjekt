@@ -77,7 +77,7 @@ void CalendarMainWindow::addAppointment(Appointment appointment, int repeat) {
 }
 
 void CalendarMainWindow::on_addAppointmentButton_clicked() {
-    appointmentUi->setWindowTitle("Ny avtale");
+    appointmentUi->setupAppointmentUi();
     appointmentUi->show();
 }
 
