@@ -66,8 +66,10 @@ void AppointmentUi::on_buttonBox_accepted()
             ui->textEdit->toPlainText(), ui->lineEditContact->text());
 
     if(modeEdit) {
-        //emit newAppointment(appointment, repeat);
+        ui->repeatCheckBox->setVisible(true);
+        ui->repeatSpinBox->setVisible(true);
         modeEdit = false;
+        emit newAppointment(appointment, 0);
     } else {
         int repeat = ui->repeatCheckBox->isChecked() ? ui->repeatSpinBox->value() : 0;
         emit newAppointment(appointment, repeat);
@@ -93,6 +95,9 @@ void AppointmentUi::setupAppointmentUi()
 void AppointmentUi::editAppointment(Appointment currentAppointment)
 {
     modeEdit = true;
+    this->currentAppointment = currentAppointment;
+    ui->repeatCheckBox->setVisible(false);
+    ui->repeatSpinBox->setVisible(false);
     ui->appointmentName->setText(currentAppointment.getAppointmentName());
     ui->radioFravaer->setChecked(currentAppointment.getAbsence()=="1" ? true : false);
     ui->dateTimeStart->setDateTime(currentAppointment.getStartDateTime());
@@ -135,4 +140,12 @@ void AppointmentUi::on_radioAvtale_toggled(bool checked)
         ui->radioLab->setText("Avspasering");
         ui->radioMote->setText("Kurs");
     }
+}
+
+void AppointmentUi::on_buttonBox_rejected()
+{
+    emit newAppointment(currentAppointment, 0);
+    ui->repeatCheckBox->setVisible(true);
+    ui->repeatSpinBox->setVisible(true);
+    modeEdit = false;
 }

@@ -118,9 +118,9 @@ void CalendarMainWindow::on_contactlistButton_clicked() {
 
 void CalendarMainWindow::on_editAppointmentButton_clicked() {
     QDate selectedDate = ui->calendarWidget->selectedDate();
-    QList<Appointment> list = map.value(selectedDate);
-    Appointment currentAppointment = list.at(ui->appointmentTable->currentRow());
-
+    QList<Appointment> list = map.take(selectedDate);
+    Appointment currentAppointment = list.takeAt(ui->appointmentTable->currentRow());
+    map.insert(selectedDate,list);
     appointmentUi->editAppointment(currentAppointment);
     appointmentUi->setWindowTitle("Rediger avtale");
     appointmentUi->show();

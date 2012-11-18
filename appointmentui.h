@@ -30,9 +30,12 @@ private slots:
     void on_radioAvtale_toggled(bool checked);
     void on_dateTimeStart_dateTimeChanged(const QDateTime &date);
 
+    void on_buttonBox_rejected();
+
 private:
     Ui::AppointmentUi *ui;
     bool modeEdit;
+    Appointment currentAppointment;
 
 signals:
     void newAppointment(Appointment, int);
