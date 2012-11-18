@@ -38,6 +38,27 @@ bool Appointment::operator<(const Appointment& other) const {
     return startDateTime < other.getStartDateTime();
 }
 
+QString Appointment::getQStringOfType(Attributes attribute) const {
+    switch (attribute) {
+        case START:
+            return startDateTime.toString();
+        case END:
+            return endDateTime.toString();
+        case NAME:
+            return appointmentName;
+        case LOCATION:
+            return location;
+        case TYPE:
+            return type;
+        case INFO:
+            return info;
+        case CONTACT:
+            return contact;
+        default:
+            return "";
+    }
+}
+
 void Appointment::moveDays(int days) {
     startDateTime = startDateTime.addDays(days);
     endDateTime = endDateTime.addDays(days);

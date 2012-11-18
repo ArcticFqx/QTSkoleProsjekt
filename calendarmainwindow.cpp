@@ -2,6 +2,7 @@
 #include <QCloseEvent>
 #include <QDateTime>
 #include <QDebug>
+#include <QMessageBox>
 #include <QTextStream>
 
 #include "appointment.h"
@@ -29,7 +30,7 @@ CalendarMainWindow::CalendarMainWindow(QWidget *parent) :
 
     connect(appointmentUi,SIGNAL(openContactsList()),this,SLOT(on_contactlistButton_clicked()));
     connect(contactsgui, SIGNAL(selectedContact(QString)), appointmentUi, SLOT(setContactLineEditText(QString)));
-    connect(appointmentUi, SIGNAL(newAppointment(Appointment, int)), this, SLOT(addAppointment(Appointment, int)));
+    connect(appointmentUi, SIGNAL(newAppointment(Appointment, int)), this, SLOT(addAppointmentFromUi(Appointment, int)));
     connect(ui->actionAddAppointment, SIGNAL(triggered()), this, SLOT(on_addAppointmentButton_clicked()));
     connect(ui->actionOpenContacts, SIGNAL(triggered()), this, SLOT(on_contactlistButton_clicked()));
     connect(ui->actionSaveAndExit, SIGNAL(triggered()), this, SLOT(on_closeButton_clicked()));
@@ -67,7 +68,11 @@ void CalendarMainWindow::addAppointment(Appointment appointment) {
     }
 }
 
-void CalendarMainWindow::addAppointment(Appointment appointment, int repeat) {
+void CalendarMainWindow::addAppointmentFromUi(Appointment appointment, int repeat) {
+    if (appointmentOverlaps(appointment)) {
+        QMessageBox::information(this, "", "Denne avtalen overlapper en annen avtale.");
+    }
+
     addAppointment(appointment);
 
     for (int i=0; i<repeat; i++) {
@@ -78,6 +83,7 @@ void CalendarMainWindow::addAppointment(Appointment appointment, int repeat) {
 
 void CalendarMainWindow::on_addAppointmentButton_clicked() {
     appointmentUi->setupAppointmentUi();
+    appointmentUi->setDateTimeEditDefaults();
     appointmentUi->show();
 }
 
@@ -110,8 +116,7 @@ void CalendarMainWindow::on_contactlistButton_clicked() {
     contactsgui->show();
 }
 
-void CalendarMainWindow::on_editAppointmentButton_clicked()
-{
+void CalendarMainWindow::on_editAppointmentButton_clicked() {
     QDate selectedDate = ui->calendarWidget->selectedDate();
     QList<Appointment> list = map.value(selectedDate);
     Appointment currentAppointment = list.at(ui->appointmentTable->currentRow());
@@ -146,14 +151,91 @@ void CalendarMainWindow::on_removeAppointmentButton_clicked() {
     }
 }
 
+void CalendarMainWindow::on_searchButton_clicked() {
+    if (!ui->searchLineEdit->text().isEmpty()) {
+        ui->chosenDateLabel->setText("Søkeresultater");
+
+        QList<Appointment> list = find(ui->searchLineEdit->text());
+        insertIntoAppointmentTable(list);
+    }
+}
+
+void CalendarMainWindow::on_searchLineEdit_returnPressed() {
+    on_searchButton_clicked();
+}
+
 
 //Private methods
+bool CalendarMainWindow::appointmentOverlaps(Appointment newAppointment) const {
+    bool overlap = false;
+    QDate startDate = newAppointment.getStartDateTime().date();
+
+    if (map.contains(startDate)) {
+        QList<Appointment> list = map.value(startDate);
+
+        foreach (Appointment current, list) {
+            overlap = (newAppointment.getStartDateTime() >= current.getStartDateTime()
+                    && newAppointment.getStartDateTime() < current.getEndDateTime())
+                    || (newAppointment.getEndDateTime() > current.getStartDateTime()
+                    && newAppointment.getEndDateTime() <= current.getEndDateTime());
+
+            if (overlap) {
+                break;
+            }
+        }
+    }
+
+    return overlap;
+}
+
+QList<Appointment> CalendarMainWindow::find(QString key) const {
+    QList<Appointment> resultsList;
+
+    foreach (QList<Appointment> currentList, map) {
+        foreach (Appointment appointment, currentList) {
+            if (appointment.getQStringOfType(Appointment::NAME).contains(key, Qt::CaseInsensitive)
+                    || appointment.getQStringOfType(Appointment::LOCATION).contains(key, Qt::CaseInsensitive)
+                    || appointment.getQStringOfType(Appointment::CONTACT).contains(key, Qt::CaseInsensitive)
+                    || appointment.getQStringOfType(Appointment::INFO).contains(key, Qt::CaseInsensitive)) {
+
+                resultsList << appointment;
+            }
+        }
+    }
+
+    qSort(resultsList);
+    return resultsList;
+}
+
 QString CalendarMainWindow::getPathToFilename() const {
     QString path = QApplication::applicationDirPath();
     path.append("/");
     path.append("appointments.txt");
 
     return path;
+}
+
+void CalendarMainWindow::insertIntoAppointmentTable(QList<Appointment> list) const {
+    QTableWidget* table = ui->appointmentTable;
+
+    int count = list.count();
+
+    for (int i=0; i<count; i++) {
+        Appointment appointment = list.at(i);
+        table->insertRow(i);
+
+        QTableWidgetItem* itemStart = new QTableWidgetItem(appointment.getStartDateTime().toString("HH:mm"));
+        QTableWidgetItem* itemEnd = new QTableWidgetItem(appointment.getEndDateTime().toString("dd.MM.yy HH:mm"));
+        QTableWidgetItem* itemName = new QTableWidgetItem(appointment.getAppointmentName());
+
+        itemStart->setFlags(itemStart->flags() ^ Qt::ItemIsEditable);
+        itemEnd->setFlags(itemEnd->flags() ^ Qt::ItemIsEditable);
+        itemName->setFlags(itemName->flags() ^ Qt::ItemIsEditable);
+
+        table->setItem(i, 0, itemStart);
+        table->setItem(i, 1, itemEnd);
+        table->setItem(i, 2, itemName);
+    }
 }
 
 void CalendarMainWindow::loadFromFile() {
@@ -201,29 +283,9 @@ void CalendarMainWindow::setAppointmentTableHeaders() const {
 
 void CalendarMainWindow::updateAppointmentTable(const QDate& date) const {
     ui->chosenDateLabel->setText(date.toString("dd.MM.yyyy"));
-
-    QTableWidget* table = ui->appointmentTable;
-    table->setRowCount(0);
+    ui->appointmentTable->setRowCount(0);
 
     if (map.contains(date)) {
-        QList<Appointment> list = map.value(date);
-        int count = list.count();
-
-        for (int i=0; i<count; i++) {
-            Appointment appointment = list.at(i);
-            table->insertRow(i);
-
-            QTableWidgetItem* itemStart = new QTableWidgetItem(appointment.getStartDateTime().toString("HH:mm"));
-            QTableWidgetItem* itemEnd = new QTableWidgetItem(appointment.getEndDateTime().toString("dd.MM.yy HH:mm"));
-            QTableWidgetItem* itemName = new QTableWidgetItem(appointment.getAppointmentName());
-
-            itemStart->setFlags(itemStart->flags() ^ Qt::ItemIsEditable);
-            itemEnd->setFlags(itemEnd->flags() ^ Qt::ItemIsEditable);
-            itemName->setFlags(itemName->flags() ^ Qt::ItemIsEditable);
-
-            table->setItem(i, 0, itemStart);
-            table->setItem(i, 1, itemEnd);
-            table->setItem(i, 2, itemName);
-        }
+        insertIntoAppointmentTable(map.value(date));
     }
 }

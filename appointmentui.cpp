@@ -21,12 +21,24 @@ AppointmentUi::~AppointmentUi()
 }
 
 
+//Public methods
+void AppointmentUi::setDateTimeEditDefaults() const {
+    QTime time(QTime::currentTime().hour(), 0);
+    ui->dateTimeStart->setDate(QDate::currentDate());
+    ui->dateTimeStart->setTime(time);
+    ui->dateTimeEnd->setDate(QDate::currentDate());
+    ui->dateTimeEnd->setTime(time);
+}
+
+
 //Public slots
 void AppointmentUi::setContactLineEditText(QString string)
 {
     ui->lineEditContact->setText(string);
 }
 
+
+//Private slots
 void AppointmentUi::on_buttonBox_accepted()
 {
     QRadioButton* toggledButton = NULL;
@@ -48,29 +60,22 @@ void AppointmentUi::on_buttonBox_accepted()
     }
 
 
-    if(modeEdit)
-    {
+    if(modeEdit) {
         modeEdit = false;
-    }
-    else
-    {
+    } else {
         Appointment appointment(ui->dateTimeStart->dateTime(), ui->dateTimeEnd->dateTime(),
                 ui->appointmentName->text(), ui->lineEditLocation->text(),
                                 absence, appointmentType,
                 ui->textEdit->toPlainText(), ui->lineEditContact->text());
-        qDebug() << appointment.toString();
-        emit newAppointment(appointment, ui->repeatSpinBox->value());
+
+        int repeat = ui->repeatCheckBox->isChecked() ? ui->repeatSpinBox->value() : 0;
+        emit newAppointment(appointment, repeat);
     }
     close();
 }
 
-//Private methods
-void AppointmentUi::setDateTimeEditDefaults() const {
-    QTime time(QTime::currentTime().hour(), 0);
-    ui->dateTimeStart->setDate(QDate::currentDate());
-    ui->dateTimeStart->setTime(time);
-    ui->dateTimeEnd->setDate(QDate::currentDate());
-    ui->dateTimeEnd->setTime(time);
+void AppointmentUi::on_dateTimeStart_dateTimeChanged(const QDateTime &date) {
+    ui->dateTimeEnd->setMinimumDateTime(date);
 }
 
 void AppointmentUi::setupAppointmentUi()

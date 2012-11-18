@@ -31,7 +31,7 @@ public:
     QString getContact() const { return contact; }
 
 
-    void setDateStartDateTime(QDateTime start) { startDateTime = start; }
+    void setStartDateTime(QDateTime start) { startDateTime = start; }
     void setEndDateTime(QDateTime end) { endDateTime = end; }
 
     void setAppointmentName(QString name) { appointmentName = name; }
@@ -44,6 +44,7 @@ public:
 
     bool operator<(const Appointment&) const;
 
+    QString getQStringOfType(Attributes) const;
     void moveDays(int);
     QString toString() const;
 
