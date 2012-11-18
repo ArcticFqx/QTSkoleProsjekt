@@ -59,15 +59,15 @@ void AppointmentUi::on_buttonBox_accepted()
         appointmentType = ui->lineEditAnnet->text();
     }
 
+    Appointment appointment(ui->dateTimeStart->dateTime(), ui->dateTimeEnd->dateTime(),
+            ui->appointmentName->text(), ui->lineEditLocation->text(),
+                            absence, appointmentType,
+            ui->textEdit->toPlainText(), ui->lineEditContact->text());
 
     if(modeEdit) {
+        //emit newAppointment(appointment, repeat);
         modeEdit = false;
     } else {
-        Appointment appointment(ui->dateTimeStart->dateTime(), ui->dateTimeEnd->dateTime(),
-                ui->appointmentName->text(), ui->lineEditLocation->text(),
-                                absence, appointmentType,
-                ui->textEdit->toPlainText(), ui->lineEditContact->text());
-
         int repeat = ui->repeatCheckBox->isChecked() ? ui->repeatSpinBox->value() : 0;
         emit newAppointment(appointment, repeat);
     }

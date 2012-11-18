@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'calendarmainwindow.ui'
 **
-** Created: Sat 17. Nov 18:08:11 2012
-**      by: Qt User Interface Compiler version 4.8.1
+** Created: Sun 18. Nov 16:01:39 2012
+**      by: Qt User Interface Compiler version 4.8.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -71,7 +71,11 @@ public:
     QPushButton *removeAllAppointmentsButton;
     QVBoxLayout *verticalLayout_6;
     QVBoxLayout *verticalLayout_5;
+    QHBoxLayout *horizontalLayout_10;
     QLabel *chosenDateLabel;
+    QSpacerItem *horizontalSpacer_2;
+    QLineEdit *searchLineEdit;
+    QPushButton *searchButton;
     QTableWidget *appointmentTable;
     QHBoxLayout *horizontalLayout_7;
     QSpacerItem *horizontalSpacer;
@@ -84,7 +88,8 @@ public:
     {
         if (CalendarMainWindow->objectName().isEmpty())
             CalendarMainWindow->setObjectName(QString::fromUtf8("CalendarMainWindow"));
-        CalendarMainWindow->resize(711, 540);
+        CalendarMainWindow->resize(700, 449);
+        CalendarMainWindow->setMinimumSize(QSize(700, 0));
         actionSaveAndExit = new QAction(CalendarMainWindow);
         actionSaveAndExit->setObjectName(QString::fromUtf8("actionSaveAndExit"));
         actionAddAppointment = new QAction(CalendarMainWindow);
@@ -238,10 +243,29 @@ public:
         verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
         verticalLayout_5 = new QVBoxLayout();
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        horizontalLayout_10 = new QHBoxLayout();
+        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
         chosenDateLabel = new QLabel(centralwidget);
         chosenDateLabel->setObjectName(QString::fromUtf8("chosenDateLabel"));
 
-        verticalLayout_5->addWidget(chosenDateLabel);
+        horizontalLayout_10->addWidget(chosenDateLabel);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_10->addItem(horizontalSpacer_2);
+
+        searchLineEdit = new QLineEdit(centralwidget);
+        searchLineEdit->setObjectName(QString::fromUtf8("searchLineEdit"));
+
+        horizontalLayout_10->addWidget(searchLineEdit);
+
+        searchButton = new QPushButton(centralwidget);
+        searchButton->setObjectName(QString::fromUtf8("searchButton"));
+
+        horizontalLayout_10->addWidget(searchButton);
+
+
+        verticalLayout_5->addLayout(horizontalLayout_10);
 
         appointmentTable = new QTableWidget(centralwidget);
         appointmentTable->setObjectName(QString::fromUtf8("appointmentTable"));
@@ -279,7 +303,7 @@ public:
         CalendarMainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(CalendarMainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 711, 21));
+        menubar->setGeometry(QRect(0, 0, 700, 21));
         menuFil = new QMenu(menubar);
         menuFil->setObjectName(QString::fromUtf8("menuFil"));
         CalendarMainWindow->setMenuBar(menubar);
@@ -304,7 +328,7 @@ public:
 
     void retranslateUi(QMainWindow *CalendarMainWindow)
     {
-        CalendarMainWindow->setWindowTitle(QApplication::translate("CalendarMainWindow", "MainWindow", 0, QApplication::UnicodeUTF8));
+        CalendarMainWindow->setWindowTitle(QApplication::translate("CalendarMainWindow", "Qalender", 0, QApplication::UnicodeUTF8));
         actionSaveAndExit->setText(QApplication::translate("CalendarMainWindow", "Lagre og avslutt", 0, QApplication::UnicodeUTF8));
         actionAddAppointment->setText(QApplication::translate("CalendarMainWindow", "Legg til ny avtale", 0, QApplication::UnicodeUTF8));
         actionOpenContacts->setText(QApplication::translate("CalendarMainWindow", "\303\205pne kontaktliste", 0, QApplication::UnicodeUTF8));
@@ -322,6 +346,7 @@ public:
         removeAppointmentButton->setText(QApplication::translate("CalendarMainWindow", "Slett avtale", 0, QApplication::UnicodeUTF8));
         removeAllAppointmentsButton->setText(QApplication::translate("CalendarMainWindow", "Slett alle dagens avtaler", 0, QApplication::UnicodeUTF8));
         chosenDateLabel->setText(QApplication::translate("CalendarMainWindow", "Valgt dato", 0, QApplication::UnicodeUTF8));
+        searchButton->setText(QApplication::translate("CalendarMainWindow", "S\303\270k", 0, QApplication::UnicodeUTF8));
         closeButton->setText(QApplication::translate("CalendarMainWindow", "Lagre og lukk", 0, QApplication::UnicodeUTF8));
         menuFil->setTitle(QApplication::translate("CalendarMainWindow", "Meny", 0, QApplication::UnicodeUTF8));
     } // retranslateUi

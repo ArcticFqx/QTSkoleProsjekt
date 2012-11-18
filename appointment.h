@@ -10,7 +10,7 @@ class Appointment {
 
 public:
     enum Attributes {
-        START, END, NAME, LOCATION, ABSENCE, TYPE, INFO, CONTACT
+        START, END, NAME, LOCATION, ABSENCE, MISC, TYPE, INFO, CONTACT
     };
 
     Appointment();
@@ -25,6 +25,7 @@ public:
     QString getAppointmentName() const { return appointmentName; }
     QString getLocation() const { return location; }
     QString getAbsence() const { return absence; }
+    QString getMisc() const { return miscellaneous; }
     QString getType() const { return type; }
     QString getInfo() const { return info; }
 
@@ -38,6 +39,7 @@ public:
     void setLocation(QString loc) { location = loc; }
     void setAbsence(QString abs ) { absence = abs; }
     void setType(QString typetxt) { type = typetxt; }
+    void setMisc(QString misc){ miscellaneous = misc; }
     void setInfo(QString infotxt) { info = infotxt; }
 
     void setContact(QString contacttxt) { contact = contacttxt; }
@@ -48,7 +50,6 @@ public:
     void moveDays(int);
     QString toString() const;
 
-
     static const QString SEPARATOR;
 
 private:
@@ -58,6 +59,7 @@ private:
     QString appointmentName;
     QString location;
     QString absence;
+    QString miscellaneous;
     QString type;
     QString info;
 

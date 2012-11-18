@@ -16,15 +16,16 @@ Appointment::Appointment(QStringList list) {
     appointmentName = list.at(NAME);
     location = list.at(LOCATION);
     absence = list.at(ABSENCE);
+    miscellaneous = list.at(MISC);
     type = list.at(TYPE);
     info = list.at(INFO);
     contact = list.at(CONTACT);
 }
 
 Appointment::Appointment(QDateTime start, QDateTime end, QString name, QString loc,
-        QString absence, QString typetxt, QString infotxt, QString contacttxt) :
+        QString absence, QString misc, QString typetxt, QString infotxt, QString contacttxt) :
     startDateTime(start), endDateTime(end), appointmentName(name), absence(absence),
-        location(loc), type(typetxt), info(infotxt), contact(contacttxt) {
+        miscellaneous(misc), location(loc), type(typetxt), info(infotxt), contact(contacttxt) {
 }
 
 
@@ -48,6 +49,10 @@ QString Appointment::getQStringOfType(Attributes attribute) const {
             return appointmentName;
         case LOCATION:
             return location;
+        case ABSENCE:
+            return absence;
+        case MISC:
+            return miscellaneous;
         case TYPE:
             return type;
         case INFO:
@@ -75,6 +80,8 @@ QString Appointment::toString() const {
     string.append(SEPARATOR);
     string.append(absence);
     string.append(SEPARATOR);
+    string.append(miscellaneous);
+    string.append(SEPERATOR);
     string.append(type);
     string.append(SEPARATOR);
     string.append(info);
