@@ -15,8 +15,8 @@ public:
 
     Appointment();
     Appointment(QStringList);
-    Appointment(QDateTime start, QDateTime end, QString name, QString loc,
-                QString absence, QString typetxt, QString infotxt, QString contacttxt);
+    Appointment(QDateTime start, QDateTime end, QString name, QString loc, QString absence,
+                 QString misc, QString typetxt, QString infotxt, QString contacttxt);
 
 
     QDateTime getStartDateTime() const { return startDateTime; }

@@ -81,7 +81,7 @@ QString Appointment::toString() const {
     string.append(absence);
     string.append(SEPARATOR);
     string.append(miscellaneous);
-    string.append(SEPERATOR);
+    string.append(SEPARATOR);
     string.append(type);
     string.append(SEPARATOR);
     string.append(info);
