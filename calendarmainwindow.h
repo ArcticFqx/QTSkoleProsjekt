@@ -27,6 +27,7 @@ public:
 private slots:
     void addAppointment(Appointment);
     void addAppointmentFromUi(Appointment, int);
+
     void on_addAppointmentButton_clicked();
     void on_appointmentTable_cellClicked(int row, int column);
     void on_calendarWidget_clicked(const QDate &date);

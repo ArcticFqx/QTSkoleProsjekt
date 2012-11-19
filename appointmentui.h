@@ -27,9 +27,8 @@ public slots:
 
 private slots:
     void on_buttonBox_accepted();
-    void on_radioAvtale_toggled(bool checked);
     void on_dateTimeStart_dateTimeChanged(const QDateTime &date);
-
+    void on_radioAvtale_toggled(bool checked);
     void on_buttonBox_rejected();
 
 private:

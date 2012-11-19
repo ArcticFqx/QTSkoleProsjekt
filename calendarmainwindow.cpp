@@ -11,7 +11,7 @@
 CalendarMainWindow::CalendarMainWindow(QWidget *parent) :
         QMainWindow(parent),
         ui(new Ui::CalendarMainWindow) {
-    setWindowTitle("Planlegger");
+    // Set up the gui
     ui->setupUi(this);
     isSok = false;
     contactsgui = new ContactsGui();
@@ -155,7 +155,9 @@ void CalendarMainWindow::on_removeAppointmentButton_clicked() {
 }
 
 void CalendarMainWindow::on_searchButton_clicked() {
+    // Clear list and populate with results
     if (!ui->searchLineEdit->text().isEmpty()) {
+        ui->appointmentTable->setRowCount(0);
         ui->chosenDateLabel->setText("Søkeresultater");
 
         QList<Appointment> list = find(ui->searchLineEdit->text());
@@ -295,6 +297,7 @@ void CalendarMainWindow::updateAppointmentTable(const QDate& date) const {
     }
 }
 
+// Required to prevent unwanted bugs after doing certain actions
 void CalendarMainWindow::clearFields()
 {
     ui->editAppointmentButton->setEnabled(false);

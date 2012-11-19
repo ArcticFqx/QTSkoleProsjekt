@@ -44,11 +44,11 @@ public:
 
     void setContact(QString contacttxt) { contact = contacttxt; }
 
-    bool operator<(const Appointment&) const;
+    bool operator < (const Appointment&) const;
 
     QString getQStringOfType(Attributes) const;
-    void moveDays(int);
-    QString toString() const;
+    void moveDays(int); // Brukt for å lage repeterende avtaler
+    QString toString() const; // String som blir brukt til å lagres med
 
     static const QString SEPARATOR;
 
