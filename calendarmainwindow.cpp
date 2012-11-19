@@ -89,6 +89,7 @@ void CalendarMainWindow::on_addAppointmentButton_clicked() {
 
 
 void CalendarMainWindow::on_appointmentTable_cellClicked(int row, int column) {
+    Q_UNUSED(column);
     QDate selectedDate = ui->calendarWidget->selectedDate();
     if (map.contains(selectedDate)) {
         QList<Appointment> list = map.value(selectedDate);
