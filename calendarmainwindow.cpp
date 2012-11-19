@@ -13,6 +13,7 @@ CalendarMainWindow::CalendarMainWindow(QWidget *parent) :
         ui(new Ui::CalendarMainWindow) {
     setWindowTitle("Planlegger");
     ui->setupUi(this);
+    isSok = false;
     contactsgui = new ContactsGui();
     appointmentUi = new AppointmentUi();
     ui->editAppointmentButton->setEnabled(false);
@@ -91,7 +92,7 @@ void CalendarMainWindow::on_addAppointmentButton_clicked() {
 void CalendarMainWindow::on_appointmentTable_cellClicked(int row, int column) {
     Q_UNUSED(column);
     QDate selectedDate = ui->calendarWidget->selectedDate();
-    if (map.contains(selectedDate)) {
+    if (!isSok && map.contains(selectedDate)) {
         QList<Appointment> list = map.value(selectedDate);
         Appointment currentAppointment = list.at(row);
         ui->editAppointmentButton->setEnabled(true);
@@ -107,6 +108,7 @@ void CalendarMainWindow::on_appointmentTable_cellClicked(int row, int column) {
 void CalendarMainWindow::on_calendarWidget_clicked(const QDate &date) {
     updateAppointmentTable(date);
     clearFields();
+    isSok = false;
 }
 
 void CalendarMainWindow::on_closeButton_clicked() {
@@ -158,6 +160,8 @@ void CalendarMainWindow::on_searchButton_clicked() {
 
         QList<Appointment> list = find(ui->searchLineEdit->text());
         insertIntoAppointmentTable(list);
+        isSok = true;
+        clearFields();
     }
 }
 

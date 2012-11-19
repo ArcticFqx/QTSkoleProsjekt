@@ -55,6 +55,7 @@ private:
     void setAppointmentTableHeaders() const;
     void updateAppointmentTable(const QDate&) const;
     void clearFields();
+    bool isSok;
 };
 
 #endif // CALENDARMAINWINDOW_H
