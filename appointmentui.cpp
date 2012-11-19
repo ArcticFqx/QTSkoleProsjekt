@@ -1,7 +1,6 @@
 #include "appointment.h"
 #include "appointmentui.h"
 #include "ui_appointmentui.h"
-#include "QDebug"
 
 AppointmentUi::AppointmentUi(QWidget *parent) :
     QWidget(parent),
@@ -74,6 +73,7 @@ void AppointmentUi::on_buttonBox_accepted()
         int repeat = ui->repeatCheckBox->isChecked() ? ui->repeatSpinBox->value() : 0;
         emit newAppointment(appointment, repeat);
     }
+    ui->lineEditAnnet->setText("");
     close();
 }
 
@@ -147,5 +147,6 @@ void AppointmentUi::on_buttonBox_rejected()
     emit newAppointment(currentAppointment, 0);
     ui->repeatCheckBox->setVisible(true);
     ui->repeatSpinBox->setVisible(true);
+    ui->lineEditAnnet->setText("");
     modeEdit = false;
 }

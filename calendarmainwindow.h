@@ -54,6 +54,7 @@ private:
     void saveToFile() const;
     void setAppointmentTableHeaders() const;
     void updateAppointmentTable(const QDate&) const;
+    void clearFields();
 };
 
 #endif // CALENDARMAINWINDOW_H

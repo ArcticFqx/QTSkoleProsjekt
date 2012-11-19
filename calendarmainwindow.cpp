@@ -8,7 +8,6 @@
 #include "appointment.h"
 #include "calendarmainwindow.h"
 #include "ui_calendarmainwindow.h"
-#include "QDebug"
 
 CalendarMainWindow::CalendarMainWindow(QWidget *parent) :
         QMainWindow(parent),
@@ -17,14 +16,14 @@ CalendarMainWindow::CalendarMainWindow(QWidget *parent) :
     ui->setupUi(this);
     contactsgui = new ContactsGui();
     appointmentUi = new AppointmentUi();
+    ui->editAppointmentButton->setEnabled(false);
+    ui->removeAppointmentButton->setEnabled(false);
 
     file = new QFile(getPathToFilename());
 
     setAppointmentTableHeaders();
 
-
     loadFromFile();
-
 
     updateAppointmentTable(ui->calendarWidget->selectedDate());
 
@@ -79,6 +78,8 @@ void CalendarMainWindow::addAppointmentFromUi(Appointment appointment, int repea
         appointment.moveDays(7);
         addAppointment(appointment);
     }
+    updateAppointmentTable(QDate::currentDate());
+    clearFields();
 }
 
 void CalendarMainWindow::on_addAppointmentButton_clicked() {
@@ -94,6 +95,7 @@ void CalendarMainWindow::on_appointmentTable_cellClicked(int row, int column) {
         QList<Appointment> list = map.value(selectedDate);
         Appointment currentAppointment = list.at(row);
         ui->editAppointmentButton->setEnabled(true);
+        ui->removeAppointmentButton->setEnabled(true);
 
         ui->typeLineEdit->setText(currentAppointment.getType());
         ui->locationLineEdit->setText(currentAppointment.getLocation());
@@ -104,7 +106,7 @@ void CalendarMainWindow::on_appointmentTable_cellClicked(int row, int column) {
 
 void CalendarMainWindow::on_calendarWidget_clicked(const QDate &date) {
     updateAppointmentTable(date);
-    ui->editAppointmentButton->setEnabled(false);
+    clearFields();
 }
 
 void CalendarMainWindow::on_closeButton_clicked() {
@@ -288,4 +290,14 @@ void CalendarMainWindow::updateAppointmentTable(const QDate& date) const {
     if (map.contains(date)) {
         insertIntoAppointmentTable(map.value(date));
     }
+}
+
+void CalendarMainWindow::clearFields()
+{
+    ui->editAppointmentButton->setEnabled(false);
+    ui->removeAppointmentButton->setEnabled(false);
+    ui->typeLineEdit->setText("");
+    ui->locationLineEdit->setText("");
+    ui->contactLineEdit->setText("");
+    ui->infoLineEdit->setText("");
 }

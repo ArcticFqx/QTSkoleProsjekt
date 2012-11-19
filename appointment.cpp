@@ -2,7 +2,6 @@
 #include <QTextStream>
 
 #include "appointment.h"
-#include "QDebug"
 
 const QString Appointment::SEPARATOR = "|";
 
@@ -88,6 +87,5 @@ QString Appointment::toString() const {
     string.append(SEPARATOR);
     string.append(contact);
 
-    qDebug() << string << endl;
     return string;
 }
