@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'appointmentui.ui'
 **
-** Created: Sun 18. Nov 15:48:40 2012
+** Created: Mon 19. Nov 13:10:59 2012
 **      by: Qt User Interface Compiler version 4.8.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -53,8 +53,6 @@ public:
     QHBoxLayout *horizontalLayout_8;
     QCheckBox *repeatCheckBox;
     QSpinBox *repeatSpinBox;
-    QFrame *frame_2;
-    QHBoxLayout *horizontalLayout_10;
     QFrame *frame;
     QVBoxLayout *verticalLayout_4;
     QHBoxLayout *horizontalLayout_7;
@@ -179,17 +177,6 @@ public:
 
 
         verticalLayout_2->addWidget(frameGjenta);
-
-        frame_2 = new QFrame(AppointmentUi);
-        frame_2->setObjectName(QString::fromUtf8("frame_2"));
-        frame_2->setFrameShape(QFrame::StyledPanel);
-        frame_2->setFrameShadow(QFrame::Raised);
-        horizontalLayout_10 = new QHBoxLayout(frame_2);
-        horizontalLayout_10->setSpacing(6);
-        horizontalLayout_10->setContentsMargins(0, 0, 0, 0);
-        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
-
-        verticalLayout_2->addWidget(frame_2);
 
         frame = new QFrame(AppointmentUi);
         frame->setObjectName(QString::fromUtf8("frame"));

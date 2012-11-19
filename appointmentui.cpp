@@ -65,8 +65,7 @@ void AppointmentUi::on_buttonBox_accepted()
             ui->textEdit->toPlainText(), ui->lineEditContact->text());
 
     if(modeEdit) {
-        ui->repeatCheckBox->setVisible(true);
-        ui->repeatSpinBox->setVisible(true);
+        ui->frameGjenta->setVisible(true);
         modeEdit = false;
         emit newAppointment(appointment, 0);
     } else {
@@ -95,9 +94,9 @@ void AppointmentUi::setupAppointmentUi()
 void AppointmentUi::editAppointment(Appointment currentAppointment)
 {
     modeEdit = true;
+    setWindowTitle(currentAppointment.getAbsence()=="1" ? "Rediger fravær" : "Redoger avtale");
     this->currentAppointment = currentAppointment;
-    ui->repeatCheckBox->setVisible(false);
-    ui->repeatSpinBox->setVisible(false);
+    ui->frameGjenta->setVisible(false);
     ui->appointmentName->setText(currentAppointment.getAppointmentName());
     ui->radioFravaer->setChecked(currentAppointment.getAbsence()=="1" ? true : false);
     ui->dateTimeStart->setDateTime(currentAppointment.getStartDateTime());
@@ -126,8 +125,12 @@ void AppointmentUi::on_radioAvtale_toggled(bool checked)
 {
     if(checked)
     {
-        ui->frameGjenta->show();
-        setWindowTitle("Ny avtale");
+        if(modeEdit){
+            setWindowTitle("Rediger avtale");
+        }else{
+            setWindowTitle("Ny avtale");
+            ui->frameGjenta->show();
+        }
         ui->radioUndervisning->setText("Undervisning");
         ui->radioLab->setText("Laboratorium");
         ui->radioMote->setText("Møte");
@@ -135,7 +138,7 @@ void AppointmentUi::on_radioAvtale_toggled(bool checked)
     else
     {
         ui->frameGjenta->hide();
-        setWindowTitle("Legg til fravær");
+        setWindowTitle(modeEdit ? "Rediger fravær" : "Legg til fravær");
         ui->radioUndervisning->setText("Ferie");
         ui->radioLab->setText("Avspasering");
         ui->radioMote->setText("Kurs");
@@ -145,8 +148,7 @@ void AppointmentUi::on_radioAvtale_toggled(bool checked)
 void AppointmentUi::on_buttonBox_rejected()
 {
     emit newAppointment(currentAppointment, 0);
-    ui->repeatCheckBox->setVisible(true);
-    ui->repeatSpinBox->setVisible(true);
+    ui->frameGjenta->setVisible(true);
     ui->lineEditAnnet->setText("");
     modeEdit = false;
 }

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'calendarmainwindow.ui'
 **
-** Created: Sun 18. Nov 16:01:39 2012
+** Created: Mon 19. Nov 02:05:26 2012
 **      by: Qt User Interface Compiler version 4.8.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

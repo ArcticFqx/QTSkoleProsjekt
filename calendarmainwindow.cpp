@@ -1,4 +1,3 @@
-#include <iostream>
 #include <QCloseEvent>
 #include <QDateTime>
 #include <QDebug>
@@ -124,7 +123,6 @@ void CalendarMainWindow::on_editAppointmentButton_clicked() {
     Appointment currentAppointment = list.takeAt(ui->appointmentTable->currentRow());
     map.insert(selectedDate,list);
     appointmentUi->editAppointment(currentAppointment);
-    appointmentUi->setWindowTitle("Rediger avtale");
     appointmentUi->show();
 }
 
